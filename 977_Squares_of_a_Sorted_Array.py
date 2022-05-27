@@ -14,7 +14,7 @@ class Solution:
                 answer[high-low]=nums[low]**2
                 low+=1       
         return answer
-       
+    
        
 
 
