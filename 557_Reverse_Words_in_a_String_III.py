@@ -1,7 +1,7 @@
 class Solution:
     def reverseWords(self, s: str) -> str:
         
-        # return " ".join([i[::-1] for i in s.split(" ")])  # Ritish's Solution
+        return " ".join([i[::-1] for i in s.split(" ")])  # Ritish's Solution
 
         # Method 2 -- Very Slow
         # slist=[0]*len(s)
@@ -21,26 +21,8 @@ class Solution:
         #     count+=1
         # return "".join(slist)
 
-        #Method 3
-        # find the Index for the spaces
-        v=[]
-        for i in range(len(s)):
-            if s[i]==" ":
-                v.append(i)
-
-        # 5 10 15 20
-        start=0
-        mainList=[]
-        for ind,num in enumerate(v):
-            valList=list(s[start:ind])
-            mainList=mainList+valList[::-1]
+  
         
-        valList=list(s[v[-1]:])[::-1]
-        mainList=mainList+valList[::-1]
-
-        return mainList
-
-           
             
 
 
