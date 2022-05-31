@@ -1,4 +1,5 @@
 from typing import Deque
+import time
 class Graph:
     def __init__(self,edges):
         self.edges=edges
@@ -62,5 +63,10 @@ if __name__=="__main__":
 
     route_graph = Graph(edges=routes)
 
-    print(route_graph.getPaths(start="Mumbai", end="Yumthang"))
-    print(route_graph.getPaths1(start="Mumbai", end="Yumthang"))
+    start=time.time()
+    print(route_graph.getPaths(start="Mumbai", end="Toronto"))
+    print(time.time()-start)
+
+    start=time.time()
+    print(route_graph.getPaths1(start="Mumbai", end="Toronto"))
+    print(time.time()-start)
