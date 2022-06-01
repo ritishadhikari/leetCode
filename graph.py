@@ -40,11 +40,8 @@ class Graph:
             
             if node==end:
                 finalHoldElements.appendleft(listToAppend)
-                continue
-            else:
-                dest=self.graph_direct.get(node)
-                if dest:
-                    for d in dest:
+            elif self.graph_direct.get(node):
+                    for d in self.graph_direct.get(node):
                         elementStack.append(d)
                         tempHoldElements.append(listToAppend+[d])
 
@@ -65,9 +62,9 @@ if __name__=="__main__":
     route_graph = Graph(edges=routes)
 
     start=time.time()
-    print(route_graph.getPaths(start="Paris", end="New York"))
+    print(route_graph.getPaths(start="Paris", end="Toronto"))
     print(time.time()-start)
 
     start=time.time()
-    print(route_graph.getPaths1(start="Paris", end="New York"))
+    print(route_graph.getPaths1(start="Paris", end="Toronto"))
     print(time.time()-start)
