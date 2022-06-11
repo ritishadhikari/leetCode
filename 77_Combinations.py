@@ -2,36 +2,19 @@ from typing import List
 from collections import deque
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
-        stack=deque()
-        finalStack=deque()
-        
-        num=n-k
-        numTotal=1
-        for i in range(n,num,-1):
-            numTotal*=i
-        
-        denomTotal=1
-        for i in range(k,0,-1):
-            denomTotal*=i
-            
-        totalLength=numTotal//denomTotal
-        
-        for i in range(1,n+1):
-            stack.append([i])
-            while stack:
+        stack=deque([[i] for i in range(1,n+1)])
+        while stack:
+            if len(stack[0])==k:
+                return stack
+            else:
                 pointer=stack.popleft()
-                if len(pointer)==k:
-                    finalStack.append(pointer)
-                    if len(finalStack)==totalLength:
-                        return finalStack
-                elif len(pointer)<k and pointer[-1]<n:
-                    for j in range(pointer[-1]+1,n+1):
-                        stack.append(pointer+[j])
-                        
-        return finalStack
+                j=pointer[-1]+1
+                while j<=n:
+                    stack.append(pointer+[j])
+                    j+=1
 
 
 if __name__=="__main__":
     n=4
-    k=3
+    k=2
     print(Solution().combine(n=n,k=k))
