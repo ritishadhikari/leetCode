@@ -8,19 +8,16 @@ class Solution:
             return max(nums)
         else:
             hash={0:nums[0],1:nums[1]}
-      
-            nextKey1=2
-            nextKey2=3
             val=0
-            while nextKey2<=len(nums):
-                if nextKey2<len(nums):
+            while val<=len(nums)-3:
+                nextKey1=val+2
+                nextKey2=val+3
+                if val<len(nums)-3:
                     hash[nextKey1]=max(hash[val]+nums[nextKey1],hash.get(nextKey1,0))
                     hash[nextKey2]=max(hash[val]+nums[nextKey2],hash.get(nextKey2,0))
                 else:
                     hash[nextKey1]=max(hash[val]+nums[nextKey1],hash.get(nextKey1,0))
                 
-                nextKey1+=1
-                nextKey2+=1
                 val+=1
         
             return max(hash.values())
