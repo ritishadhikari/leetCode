@@ -15,27 +15,25 @@ class Solution:
             x=indexes[0]
             y=indexes[1]
 
-            # Sort out XEarly and XNext
+             # Sorting out x
+            if x==rows-1:
+                xNext=None
+            else:
+                xNext=x+1
             if x>0:
                 xEarly=x-1
-                if x==rows-1:  
-                    xNext=None
-                else:
-                    xNext=x+1
-            else :
+            else: 
                 xEarly=None
-                xNext=x+1
             
-            # Sort out YEarly and YNext
+            # Sorting out y
+            if y==cols-1:
+                yNext=None
+            else:
+                yNext=y+1
             if y>0:
                 yEarly=y-1
-                if y==cols-1:
-                    yNext=None
-                else:
-                    yNext=y+1
-            else:
+            else: 
                 yEarly=None
-                yNext=y+1
             
             if xEarly is not None:
                 if image[xEarly][y]==startColor and image[xEarly][y]!=color:
