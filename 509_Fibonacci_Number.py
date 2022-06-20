@@ -6,10 +6,7 @@ class Solution:
             twoElementBack=count-2
             oneElementBack=count-1
             if twoElementBack<0:
-                if oneElementBack<0:
-                    sumDict[count]=0
-                else: 
-                    sumDict[count]=1
+                sumDict[count]=count
             else:
                 sumDict[count]=sumDict[twoElementBack]+sumDict[oneElementBack]
             count+=1
