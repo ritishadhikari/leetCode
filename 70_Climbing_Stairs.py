@@ -21,15 +21,25 @@ class Solution:
         #         stack.append(val+[2])
         # return count
         
-        sumDict={1:1,2:2}
-        if n<3:
-            return sumDict[n]
-        else:
-            count=3
-            while count<=n:
-                sumDict[count]=sumDict[count-1]+sumDict[count-2]
-                count+=1
+        # sumDict={1:1,2:2}
+        # if n<3:
+        #     return sumDict[n]
+        # else:
+        #     count=3
+        #     while count<=n:
+        #         sumDict[count]=sumDict[count-1]+sumDict[count-2]
+        #         count+=1
 
+        # return sumDict[n]
+
+        sumDict={}
+        count=0
+        while count<=n:
+            if count<3:
+                sumDict[count]=count
+            else:
+                sumDict[count]=sumDict[count-1]+sumDict[count-2]
+            count+=1
         return sumDict[n]
 
 if __name__=="__main__":
