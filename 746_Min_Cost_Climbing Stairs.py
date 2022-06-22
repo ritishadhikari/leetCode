@@ -9,14 +9,11 @@ class Solution:
             dictVal={0:cost[0], 1:cost[1]}
             val=0
             while val<=len(cost)-2:
+                nextVal1=val+1
+                dictVal[nextVal1]=min(dictVal[val]+cost[nextVal1],dictVal.get(nextVal1,float("inf")))
                 if val<len(cost)-2:
-                    nextVal1=val+1
                     nextVal2=val+2
-                    dictVal[nextVal1]=min(dictVal[val]+cost[nextVal1],dictVal.get(nextVal1,float("inf")))
                     dictVal[nextVal2]=min(dictVal[val]+cost[nextVal2],dictVal.get(nextVal2,float("inf")))
-                else:
-                    nextVal1=val+1
-                    dictVal[nextVal1]=min(dictVal[val]+cost[nextVal1],dictVal.get(nextVal1,float("inf")))
                 val+=1
 
             lastVal=list(dictVal.keys())[-1]
@@ -25,6 +22,7 @@ class Solution:
 
 if __name__=="__main__":
     cost=[1,100,1,1,1,100,1,1,100,1]
+    cost=[10,15,20]
     # cost=[0,1,2,2]
     
     
