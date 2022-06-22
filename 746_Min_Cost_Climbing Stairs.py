@@ -2,12 +2,11 @@ from typing import List
 from collections import deque
 class Solution:
     def minCostClimbingStairs(self, cost:List[int]) -> int:
-        dictVal={}
+        
         if len(cost)<=2:
             return min(cost)
         else:
-            dictVal[0]=cost[0]
-            dictVal[1]=cost[1]
+            dictVal={0:cost[0], 1:cost[1]}
             val=0
             while val<=len(cost)-2:
                 if val<len(cost)-2:
@@ -22,7 +21,6 @@ class Solution:
 
             lastVal=list(dictVal.keys())[-1]
             penulVal=list(dictVal.keys())[-2]
-            # return lastVal, penulVal
             return min(dictVal[lastVal],dictVal[penulVal])
 
 if __name__=="__main__":
