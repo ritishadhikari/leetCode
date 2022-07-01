@@ -29,19 +29,6 @@ from typing import List
 
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        # referenceDict={0:[nums[0]]}
-        
-        # for i in range(1,len(nums)):
-        #     referenceDict[i]=set()
-        #     pIdict=referenceDict[i-1]
-        #     inserted=False
-        #     for val in pIdict:
-        #         referenceDict[i].add(nums[i]*val) 
-        #         if val<=0 and not inserted :
-        #             referenceDict[i].add(nums[i])
-        #             inserted=True
-
-        # return max([i for j in list(referenceDict.values()) for i in j])
         if len(nums)==1:
             return nums[0]
         ans=0
