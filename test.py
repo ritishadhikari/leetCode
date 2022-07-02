@@ -1,4 +1,13 @@
-dct={0:{'pos':0,'neg':0},1:{'pos':1,'neg':0},2:{'pos':2,'neg':0},3:{'pos':0,'neg':3},
-     4:{'pos':1,'neg':4},5:{'pos':5,'neg':2},6:{'pos':3,'neg':6},7:{'pos':7,'neg':4}}
+from typing import List
+from math import inf
+class Solution:
+     def maxProfit(self, prices):
+          free = 0
+          have = cool = float('-inf')
+          for p in prices:
+               free, have, cool = max(free, cool), max(have, free - p), have + p
+          return max(free, cool)
 
-print(max([k[0] for k in [list(i.values()) for i in dct.values()]]))
+if __name__=="__main__":
+     prices=[5,2,3,0,2]
+     print(Solution().maxProfit(prices=prices))
