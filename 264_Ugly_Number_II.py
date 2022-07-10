@@ -2,47 +2,25 @@ from numpy import number
 
 
 class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+        mul2=0
+        mul3=0
+        mul5=0
+        m=[]
+        for i in range(n):
+            if not m:
+                m.append(1)
+            else:
+                nextMin=min(m[mul2]*2,m[mul3]*3,m[mul5]*5)
+                m.append(nextMin)
+                if m[mul2]*2==nextMin:
+                    mul2+=1
+                if m[mul3]*3==nextMin:
+                    mul3+=1
+                if m[mul5]*5==nextMin:
+                    mul5+=1
 
-    def getPrime(self,number):
-
-        if number in [1,2,3,5]:
-            return True
-
-        data=set()
-        n=number//2+1
-        while n>=2:
-            case=None
-            if number%n==0 and (n==2 or n%2==1):
-                case=True
-                p=n//2
-
-                while p>1 and p!=n:
-                    if n%p==0:
-                        case=False
-                        break
-                    p-=1
-            if case: 
-                if n not in [2,3,5]:
-                    return False
-                else:
-                    data.add(n)
-            n-=1
-        if data:
-            return True
-        else:
-            return False
-    
-    def nthUglyNumber(self, n:int) ->int:
-        maxVal=1
-        number=1
-        count=1
-        while True:
-            if maxVal<number and self.getPrime(number=number):
-                maxVal=number
-                count+=1
-            if count==n:
-                return maxVal
-            number+=1
+        return m[-1]
 
 if __name__=="__main__":
     n=11

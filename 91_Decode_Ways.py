@@ -3,16 +3,17 @@ class Solution:
         if s=="" or s[0]=="0":
             return 0
         else:
-            dct={'multiplyLastTwoVals':0,'concatenate':1}
+            dct={'futMultiplicationPossible':0,'futConcatenationPossible':1}
             for i in range(len(s)):
                 tempVal=0
-                if int(s[i]):
-                    tempVal=dct['concatenate']
                 if i and 10<=int(s[i-1:i+1])<=26:
-                    tempVal+=dct['multiplyLastTwoVals']
-                dct={'multiplyLastTwoVals':dct['concatenate'],'concatenate':tempVal}
+                    tempVal=dct['futMultiplicationPossible']
+                if int(s[i]):
+                    tempVal+=dct['futConcatenationPossible']
+                dct={'futMultiplicationPossible':dct['futConcatenationPossible'],
+                'futConcatenationPossible':tempVal}
         
-        return dct['concatenate']
+        return dct['futConcatenationPossible']
 
 if __name__=="__main__":
-    print(Solution().numDecodings(s='10'))
+    print(Solution().numDecodings(s='12'))
