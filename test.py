@@ -1,13 +1,24 @@
-from typing import List
-class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        d = [False] * len(s)    
-        for i in range(len(s)):
-            for w in wordDict:
-                if w == s[i-len(w)+1:i+1] and (d[i-len(w)] or i-len(w) == -1):
-                    d[i] = True
-        return d[-1]
 
-s = "leetcode"
-wordDict = ["leet","code"]
-print(Solution().wordBreak(s=s, wordDict=wordDict))
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        print("hELLP")
+        if not s:
+            return 0
+
+        dp = [0 for x in range(len(s) + 1)] 
+        
+        # base case initialization
+        dp[0] = 1 
+        dp[1] = 0 if s[0] == "0" else 1   #(1)
+
+        for i in range(2, len(s) + 1): 
+            # One step jump
+            if 0 < int(s[i-1:i]) <= 9:    #(2)
+                dp[i] += dp[i - 1]
+            # Two step jump
+            if 10 <= int(s[i-2:i]) <= 26: #(3)
+                dp[i] += dp[i - 2]
+        return dp[len(s)]
+
+if __name__=="__main":
+    print(Solution().numDecodings(s='111111111111111111111111111111111111111111111'))
