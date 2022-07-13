@@ -1,24 +1,18 @@
+candidate= [
+            [1,2, 3] ,
+            [4, 5, 6]
+        ]
 
-class Solution:
-    def numDecodings(self, s: str) -> int:
-        print("hELLP")
-        if not s:
-            return 0
+print(candidate[1][2])
+'''
+[1,2,3,4,5,6,7,8,9]
 
-        dp = [0 for x in range(len(s) + 1)] 
-        
-        # base case initialization
-        dp[0] = 1 
-        dp[1] = 0 if s[0] == "0" else 1   #(1)
+0th row to 2nd row
+0th col to 2nd col
 
-        for i in range(2, len(s) + 1): 
-            # One step jump
-            if 0 < int(s[i-1:i]) <= 9:    #(2)
-                dp[i] += dp[i - 1]
-            # Two step jump
-            if 10 <= int(s[i-2:i]) <= 26: #(3)
-                dp[i] += dp[i - 2]
-        return dp[len(s)]
+row ->
+0 to 0+3*2= [1,2,3,4,5,6]
 
-if __name__=="__main":
-    print(Solution().numDecodings(s='111111111111111111111111111111111111111111111'))
+
+
+'''
