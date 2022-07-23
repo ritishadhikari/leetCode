@@ -23,5 +23,4 @@ class Solution:
 
 if __name__=="__main__":
     nums = [10,9,2,5,3,7,101,18,4,102,103]
-    nums=[0,1,0,3,2,3]
     print(Solution().lengthOfLIS(nums=nums))
