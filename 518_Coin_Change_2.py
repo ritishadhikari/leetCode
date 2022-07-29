@@ -12,6 +12,6 @@ class Solution:
         return dp[amount]
 
 if __name__=="__main__":
-    amount = 5
-    coins = [1,2,5]
+    amount = 16
+    coins = [2,5,3]
     print(Solution().change(amount=amount,coins=coins))
