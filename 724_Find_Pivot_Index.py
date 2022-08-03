@@ -2,7 +2,6 @@ from typing import List
 
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
-        length=len(nums)
         leftSum=0
         rightSum=sum(nums)
         for i,val in enumerate(nums):
