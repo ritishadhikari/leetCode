@@ -1,22 +1,18 @@
-from typing import Optional
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
 
-class ListNode:
-    def __init__(self, x=0,next=None):
-        self.val = x
-        self.next = None
-class Solution:
-    def detectCycle(self, head):
-        slow, fast = head, head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-            if slow == fast:
-                slow2 = head
-                while slow != slow2:
-                    slow = slow.next
-                    slow2 = slow2.next
-                return slow
+b=Node(val=2,children=None)
+c=Node(val=3,children=[Node(val=5, children=None),Node(val=6, children=None)])
+d=Node(val=4,children=None)
+a=Node(val=1,children=[b,c,d])
+
+print(a.children[0].val)
 
 
-ll=ListNode(3,ListNode(2,ListNode(0,ListNode(-4,None))))
-print(Solution().detectCycle(head=ll))
+'''
+[1,3,6,7]
+
+[2]
+'''
