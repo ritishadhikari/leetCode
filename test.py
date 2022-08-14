@@ -1,3 +1,3 @@
-a=""
-print("s")
-print(a[:-1])
+a=[3,4,5]
+a.remove(4)
+print(a)
