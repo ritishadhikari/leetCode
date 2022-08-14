@@ -2,7 +2,6 @@ from collections import defaultdict
 class Solution:
     def getHint(self, secret: str, guess: str) -> str:
         doNotCheck=[]
-        finalList=defaultdict(lambda:0)
         A=0
         B=0
 
@@ -11,8 +10,8 @@ class Solution:
                 A+=1
                 doNotCheck.append(i)
             else:
-                intersection=set(range(len(secret))).difference(doNotCheck)
-                for j in intersection:
+                differences=set(range(len(secret))).difference(doNotCheck)
+                for j in differences:
                     if char==secret[j] and secret[j]!=guess[j] and j!=i:
                         B+=1
                         doNotCheck.append(j)
