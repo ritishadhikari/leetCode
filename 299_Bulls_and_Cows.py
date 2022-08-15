@@ -1,25 +1,23 @@
-from collections import defaultdict
+from collections import defaultdict,deque
 class Solution:
     def getHint(self, secret: str, guess: str) -> str:
         A=0
         B=0
         secretDict=defaultdict(lambda:[])
         for ind,char in enumerate(secret):
-            if char not in secretDict.keys():
-                secretDict[char]=[ind]
-            else:
-                secretDict[char].append(ind)
-
+            if char!=guess[ind]:
+                if char not in secretDict.keys():
+                    secretDict[char]=deque([ind])
+                else:    
+                    secretDict[char].append(ind)
+                
         for ind,char in enumerate(guess):
             if char==secret[ind]:
                 A+=1
-                secretDict[char].remove(ind)
             else:
-                for val in secretDict[char]:
-                    if secret[val]!=guess[val]:
-                        B+=1
-                        secretDict[char].remove(val)
-                        break
+                if secretDict[char]:
+                    secretDict[char].popleft()
+                    B+=1
 
         return f"{A}A{B}B"
 
