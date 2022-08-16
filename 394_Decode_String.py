@@ -37,5 +37,4 @@ class Solution:
             return es
 if __name__=="__main__":
     s = "3[z]2[2[y]pq4[2[jk]e1[f]]]ef"
-    #zzz2yypqjkjkefjkjkefjkjkefjkjkefefyypqjkjkefjkjkefjkjkefjkjkefef
     print(Solution().decodeString(s=s))
