@@ -5,18 +5,14 @@ class Solution:
         B=0
         secretDict=defaultdict(lambda:[])
         for ind,char in enumerate(secret):
-            if char!=guess[ind]:
-                if char not in secretDict.keys():
-                    secretDict[char]=deque([ind])
-                else:    
-                    secretDict[char].append(ind)
-                
-        for ind,char in enumerate(guess):
-            if char==secret[ind]:
-                A+=1
+            if char!=guess[ind]:  
+                secretDict[char].append(ind)
             else:
+                A+=1
+        for ind,char in enumerate(guess):
+            if char!=secret[ind]:
                 if secretDict[char]:
-                    secretDict[char].popleft()
+                    secretDict[char].pop()
                     B+=1
 
         return f"{A}A{B}B"
