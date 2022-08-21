@@ -4,65 +4,39 @@ class Solution:
 
         r=len(matrix)
         c=len(matrix[0])
-
-        pointDict={
-                   'right':{'op':'down','ra':'i+1','ca':'j-1'},
-                   'down':{'op':'left','ra':'i-1','ca':'j-1'},
-                   'left':{'op':'up','ra':'i-1','ca':'j+1'},
-                   'up':{'op':'right','ra':'i+1','ca':'j+1'}
-                  }
-
+ 
         finalList=[]
         finalLoc=set()
+
+        finalDict={}
         
+        
+        cond2='(i,j) not in finalDict'
+        pointDict={
+                    'right':{'normalCond1':'j<c', 'normalCond2': cond2, 'iNorm':'i','jNorm': 'j+1', 'op':'down', 'ra':'i+1', 'ca':'j-1'},
+                    'down':{'normalCond1': 'i<r','normalCond2': cond2, 'iNorm': 'i+1', 'jNorm': 'j' ,'op':'left', 'ra':'i-1', 'ca':'j-1'},  
+                    'left':{'normalCond1': 'j>=0', 'normalCond2': cond2, 'iNorm': 'i', 'jNorm': 'j-1', 'op':'up','ra':'i-1', 'ca':'j+1'},  
+                    'up':{'normalCond1':'i>=0', 'normalCond2': cond2, 'iNorm': 'i-1', 'jNorm': 'j', 'op':'right','ra':'i+1','ca':'j+1'}
+                  }
+
+        
+
         i,j=0,0
         lastOp="right"
-        while len(finalList)<r*c:
-            if lastOp=="right":
-                if j<c and (i,j) not in finalLoc:
-                    finalList.append(matrix[i][j])
-                    finalLoc.add((i,j))
-                    j+=1
-                else:
-                    op=pointDict[lastOp]['op']
-                    i=eval(pointDict[lastOp]['ra'])
-                    j=eval(pointDict[lastOp]['ca'])
-                    lastOp=op
+        while len(finalDict)<r*c:
+            if eval(pointDict[lastOp]['normalCond1']) and eval(pointDict[lastOp]['normalCond2']):
+                # finalList.append(matrix[i][j])
+                # finalLoc.add((i,j))
+                finalDict[(i,j)]=matrix[i][j]
+                i=eval(pointDict[lastOp]['iNorm'])
+                j=eval(pointDict[lastOp]['jNorm'])
+            else:
+                op=pointDict[lastOp]['op']
+                i=eval(pointDict[lastOp]['ra'])
+                j=eval(pointDict[lastOp]['ca'])
+                lastOp=op
 
-            elif lastOp=="down":
-                if i<r and (i,j) not in finalLoc:
-                    finalList.append(matrix[i][j])
-                    finalLoc.add((i,j))
-                    i+=1
-                else:
-                    op=pointDict[lastOp]['op']
-                    i=eval(pointDict[lastOp]['ra'])
-                    j=eval(pointDict[lastOp]['ca'])
-                    lastOp=op
-
-            elif lastOp=="left":
-                if j>=0 and (i,j) not in finalLoc:
-                    finalList.append(matrix[i][j])
-                    finalLoc.add((i,j))
-                    j-=1
-                else:
-                    op=pointDict[lastOp]['op']
-                    i=eval(pointDict[lastOp]['ra'])
-                    j=eval(pointDict[lastOp]['ca'])
-                    lastOp=op
-            
-            elif lastOp=="up":
-                if i>=0 and (i,j) not in finalLoc:
-                    finalList.append(matrix[i][j])
-                    finalLoc.add((i,j))
-                    i-=1
-                else:
-                    op=pointDict[lastOp]['op']
-                    i=eval(pointDict[lastOp]['ra'])
-                    j=eval(pointDict[lastOp]['ca'])
-                    lastOp=op
-
-        return finalList    
+        return list(finalDict .values())  
 
 if __name__=="__main__":
     matrix = [
@@ -70,5 +44,5 @@ if __name__=="__main__":
                 [24,22,3,4,4],
                 [15,22,2,24,29],
                 [18,15,23,28,28]
-            ]
+]
     print(Solution().spiralOrder(matrix=matrix))
