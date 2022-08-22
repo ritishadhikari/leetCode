@@ -4,13 +4,9 @@ class Solution:
 
         r=len(matrix)
         c=len(matrix[0])
- 
-        finalList=[]
-        finalLoc=set()
 
         finalDict={}
-        
-        
+           
         cond2='(i,j) not in finalDict'
         pointDict={
                     'right':{'normalCond1':'j<c', 'normalCond2': cond2, 'iNorm':'i','jNorm': 'j+1', 'op':'down', 'ra':'i+1', 'ca':'j-1'},
@@ -19,14 +15,10 @@ class Solution:
                     'up':{'normalCond1':'i>=0', 'normalCond2': cond2, 'iNorm': 'i-1', 'jNorm': 'j', 'op':'right','ra':'i+1','ca':'j+1'}
                   }
 
-        
-
         i,j=0,0
         lastOp="right"
         while len(finalDict)<r*c:
             if eval(pointDict[lastOp]['normalCond1']) and eval(pointDict[lastOp]['normalCond2']):
-                # finalList.append(matrix[i][j])
-                # finalLoc.add((i,j))
                 finalDict[(i,j)]=matrix[i][j]
                 i=eval(pointDict[lastOp]['iNorm'])
                 j=eval(pointDict[lastOp]['jNorm'])
