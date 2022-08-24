@@ -15,3 +15,4 @@ class Solution:
 head=ListNode(1,ListNode(2,ListNode(3,ListNode(1,None))))
 
 print(Solution().isPalindrome(head=head))
+
