@@ -1,3 +1,3 @@
-a="02"
+import math
 
-print(int(a))
+print(math.ceil(3/2))
