@@ -8,7 +8,6 @@ class Solution:
 
         for let in words:
             if let in wu:
-                ic=False
                 if let==let[::-1]:
                     if wu[let]>=2:
                         mw+=2*len(let)
@@ -60,7 +59,7 @@ xx in wu:True
 	xx==xx[::-1]:True  # First Cond
 		wu[xx]>=2:False  # First First Cond
 		else:   # First Second Cond
-			ml=2 # len 2
+			ml=max(0,2)=2 # len 2
 			wu={'bcbc':1,'ccc':1}
 ll
 ll in wu:False
