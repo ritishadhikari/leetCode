@@ -7,7 +7,7 @@ class Solution:
         m=(r+l)//2
         while l<=r:
             sl=True if nums[l]<=nums[m] else False  # Whether Left from mid is sorted
-            sr=True if nums[r]>=nums[m] else False  # Whether right from d mis sorted
+            sr=True if nums[r]>=nums[m] else False  # Whether right from mid is sorted
             if target==nums[m]:
                 return m
             else:
