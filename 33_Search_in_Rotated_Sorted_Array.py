@@ -12,7 +12,7 @@ class Solution:
                 return m
             else:
                 if target>nums[m]:
-                    if sl and sr or sl and not sr:  # When Number is part of unsorted right from mid
+                    if sl and sr or sl and not sr:  # When Number is/may part of unsorted right from mid
                         l=m+1
                         m=(r+l)//2
                     elif not sl and sr:
@@ -23,7 +23,7 @@ class Solution:
                             r=m-1
                             m=(r+l)//2
                 else:
-                    if sl and sr or sr and not sl:  # When Number is part of unsorted left from mid
+                    if sl and sr or sr and not sl:  # When Number is/may part of unsorted left from mid
                         r=m-1
                         m=(r+l)//2
                     elif not sr and sl:
