@@ -15,7 +15,7 @@ class Solution:
             node=stack[-1]
             if node.left and node not in seenleftNode:
                 stack.append(node.left)
-                seenleftNode.add(node.left)
+                seenleftNode.add(node)
             else:
                 node=stack.pop()
                 count+=1
