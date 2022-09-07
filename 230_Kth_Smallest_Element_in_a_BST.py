@@ -9,13 +9,13 @@ class TreeNode:
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         count=0
-        # seenleftNode=set()
+        seenleftNode=set()
         stack=[root]
-        last=None
         while stack:
             node=stack[-1]
-            if node.left and node.left!=last :
+            if node.left and node not in seenleftNode:
                 stack.append(node.left)
+                seenleftNode.add(node.left)
             else:
                 node=stack.pop()
                 count+=1
@@ -23,7 +23,6 @@ class Solution:
                     return node.val
                 if node.right:
                     stack.append(node.right)
-                last=node
 
 if __name__=="__main__":
     root=TreeNode(val=5,
