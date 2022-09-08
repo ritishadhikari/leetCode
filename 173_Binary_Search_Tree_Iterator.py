@@ -28,10 +28,8 @@ class BSTIterator:
         # parent nodes
         # self.stack can empty when all the left parents have been 
         # exhausted but there might exists a right node of the parent
-        if self.currentNode or self.stack:
-            return True
-        else:
-            return False
+        return self.currentNode is not None or len(self.stack)!=0
+    
 
 if __name__=="__main__":
     root=TreeNode(val=5,
