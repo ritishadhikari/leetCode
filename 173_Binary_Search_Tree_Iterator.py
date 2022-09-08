@@ -55,3 +55,4 @@ if __name__=="__main__":
     print(obj.next())
     print(obj.next())
     print(obj.hasNext())
+    
