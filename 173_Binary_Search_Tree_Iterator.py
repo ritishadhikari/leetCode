@@ -25,9 +25,11 @@ class BSTIterator:
     def hasNext(self) -> bool:
         # self.currentNode can be False when current node is at a right 
         # node and that right node is null but the stack may exist with
-        # parent nodes
-        # self.stack can empty when all the left parents have been 
-        # exhausted but there might exists a right node of the parent
+        # parent nodes 0 1
+        # self.stack can be empty when all the left parents have been 
+        # exhausted but there might exists a right node of the parent 1 0
+        # There can exist self.current node (right node) while the 
+        # self.stack still contains the parents node 1 1
         return self.currentNode is not None or len(self.stack)!=0
     
 
@@ -55,4 +57,3 @@ if __name__=="__main__":
     print(obj.next())
     print(obj.next())
     print(obj.hasNext())
-    
