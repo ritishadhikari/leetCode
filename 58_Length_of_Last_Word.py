@@ -1,8 +1,18 @@
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        s=[m for m in s.split() if m]
-        return len(s[-1])
-
+        last=None
+        k=''
+        for c in s:
+            if c and c!=" ":
+                k+=c
+            else:
+                if k:
+                    last=k
+                    k=""
+            if k:
+                last=k
+        return len(last)
+        
 if __name__=="__main__":
-    s = "   fly me   to   the moon  "
+    s = "luffy is still joyboy     "
     print(Solution().lengthOfLastWord(s=s))
