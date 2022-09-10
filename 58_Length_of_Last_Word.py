@@ -9,8 +9,8 @@ class Solution:
                 if k:
                     last=k
                     k=""
-            if k:
-                last=k
+        if k:
+            last=k
         return len(last)
         
 if __name__=="__main__":
