@@ -1,3 +1,5 @@
 import math
 
-print(math.ceil(3/2))
+s=[[6,7],[3,6]]
+
+print(s[0][1])
