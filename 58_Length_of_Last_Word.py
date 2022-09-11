@@ -2,13 +2,14 @@ class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         last=None
         k=''
-        for c in s:
+        for c in s[::-1]:
             if c and c!=" ":
                 k+=c
             else:
                 if k:
                     last=k
                     k=""
+                    break
         if k:
             last=k
         return len(last)
