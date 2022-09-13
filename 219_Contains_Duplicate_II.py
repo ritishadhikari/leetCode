@@ -5,11 +5,10 @@ class Solution:
         traceDict=defaultdict(lambda : [])
         for i,val in enumerate(nums):
             if val in traceDict.keys():
-                for j in traceDict[val]:
-                    if abs(j-i)<=k:
-                        return True
+                j=traceDict[val].pop()
+                if abs(j-i)<=k:
+                    return True
             traceDict[val].append(i)
-           
         return False
 
 if __name__=="__main__":
