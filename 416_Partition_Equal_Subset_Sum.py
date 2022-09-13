@@ -16,8 +16,6 @@ class Solution:
                     for n in getset:
                         if n+i in dp and not dp[n+i] :
                             dp[n+i]=True
-                            # if n+i==tot:
-                            #     return True
                             getsett.add(n+i)
                     getset.add(i)
                     for j in getsett: getset.add(j)
