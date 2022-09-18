@@ -12,17 +12,17 @@ class Solution:
         node=root
         val=0
         container=defaultdict()
-        while stack and stack[-1] or node:
+        while (stack and stack[-1]) or node:
             if node and node.left:
                 if val:  
-                    val=max(val-1,0)
+                    val=val-1
                 node=node.left
                 stack.append(node)
             else:
                 node=stack[-1]
                 if node.right and node.right!=lastNode:
                     stack.append(node.right)
-                    val=max(val-1,0)
+                    val=val-1
                     node=node.right
                 else:
                     node=stack.pop()
