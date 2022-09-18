@@ -1,5 +1,5 @@
 from typing import Optional, List
-from collections import defaultdict
+from collections import defaultdict, deque
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -7,6 +7,8 @@ class TreeNode:
         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        """
+        # DFS
         stack=[root]
         lastNode=None
         node=root
@@ -31,7 +33,18 @@ class Solution:
                     lastNode=node
                     node=None
         return list(container.values())[::-1] if container else []
-
+        """
+        # BFS
+        stack=deque([root])
+        container=[]
+        while stack:
+            preLen=len(stack)
+            for i in range(preLen):
+                node=stack.popleft()
+                if i==preLen-1: container.append(node.val)
+                if node.left:   stack.append(node.left)
+                if node.right:  stack.append(node.right)
+        return container
 
 
 if __name__=="__main__":
@@ -49,3 +62,4 @@ if __name__=="__main__":
                             left=None,
                             right=None))
     print(Solution().rightSideView(root=root))
+
