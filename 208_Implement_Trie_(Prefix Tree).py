@@ -15,7 +15,6 @@ class Trie:
             if w not in trie: return False
             else: trie=trie[w]
         return True if 'word' in trie else False
-
         
     def startsWith(self, prefix: str) -> bool:
         trie=self.trie
