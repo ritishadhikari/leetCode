@@ -9,38 +9,31 @@ class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         if p is None and q is None:
             return True
-        stackP=[p]
-        stackQ=[q]
-        while stackP and stackQ and stackP[-1] and stackQ[-1]:
-            P=stackP.pop()
-            Q=stackQ.pop()
-            if P:
-                pVal=P.val
-            else:
-                pVal=None
-            if Q:
-                qVal=Q.val
-            else:   
-                qVal=None
-            if not pVal==qVal:
-                return False
-            else:
-                if P.right and Q.right:
-                    stackP.append(P.right)
-                    stackQ.append(Q.right)
-                else:
-                    if (P.right and not Q.right) or (not P.right and Q.right):
-                        return False
-                if P.left and Q.left:
-                    stackP.append(P.left)
-                    stackQ.append(Q.left)
-                else:
-                    if (P.left and not Q.left) or (not P.left and Q.left):
-                        return False
-        if (stackP and not stackQ) or (stackQ and not stackP) or (stackP[-1] and stackQ[-1]) :
+        elif (p and not q) or (q and not p) :
             return False
         else:
-            return True
+            stackP=[p]
+            stackQ=[q]
+            while stackP and stackQ and stackP[-1] and stackQ[-1]:
+                P=stackP.pop()
+                Q=stackQ.pop()
+                if not P.val==Q.val:
+                    return False
+                else:
+                    if P.right and Q.right:
+                        stackP.append(P.right)
+                        stackQ.append(Q.right)
+                    elif (P.right and not Q.right) or (not P.right and Q.right):
+                            return False
+                    if P.left and Q.left:
+                        stackP.append(P.left)
+                        stackQ.append(Q.left)
+                    elif (P.left and not Q.left) or (not P.left and Q.left):
+                            return False
+            if stackP or stackQ:
+                return False
+            else:
+                return True
 
 if __name__=="__main__":
     p=TreeNode(val=1,
