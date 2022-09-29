@@ -8,7 +8,6 @@ class Solution:
         lst=[]
         lastNum=None
         for char in s:
-
             # If the Character corresponds to a number
             if ord(char)>=48 and ord(char)<=57:
                 # if it's a new number
@@ -44,74 +43,21 @@ class Solution:
                     # if the to be multiplied number continues
                     else: num=num*multiplier+int(char)
                 multiplier=10
-            # If the Character corresponds to addition
-            elif ord(char)==43: 
+            # If the Character corresponds to +,-,/ or +
+            elif ord(char)==43 or ord(char)==45 or ord(char)==47 or ord(char)==42: 
                 if lastAdd: lastAdd=False; lst.append(num)
                 elif lastSub: lastSub=False; lst.append(num)
-                elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num);    lastMul=False
-                elif lastDiv: 
-                    lastNum=lst.pop()
-                    if lastNum<0:  
-                        lst.append(-1*((-1*lastNum)//num))
-                    else: 
-                        lst.append(lastNum//num)
-                    lastDiv=False
-                lastAdd=True   
+                elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num); lastMul=False
+                elif lastDiv: lastNum=lst.pop(); lst.append(-1*((-1*lastNum)//num)) if lastNum<0 else lst.append(lastNum//num);lastDiv=False
+                if ord(char)==43: lastAdd=True  # If the Character corresponds to addition
+                elif ord(char)==45: lastSub=True  # If the Character corresponds to subtraction
+                elif ord(char)==47: lastDiv=True  # If the Character corresponds to division  
+                elif ord(char)==42: lastMul=True  # If the Character corresponds to multiplication
                 multiplier=1
-            # If the Character corresponds to subtraction
-            elif ord(char)==45: 
-                if lastAdd: lastAdd=False; lst.append(num)
-                elif lastSub: lastSub=False; lst.append(num)
-                elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num);    lastMul=False
-                elif lastDiv: 
-                    lastNum=lst.pop()
-                    if lastNum<0:  
-                        lst.append(-1*((-1*lastNum)//num))
-                    else: 
-                        lst.append(lastNum//num)
-                    lastDiv=False
-                lastSub=True
-                multiplier=1
-            # If the Character corresponds to a division
-            elif ord(char)==47: 
-                if lastAdd: lastAdd=False; lst.append(num)
-                elif lastSub: lastSub=False; lst.append(num)
-                elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num);    lastMul=False
-                elif lastDiv: 
-                    lastNum=lst.pop()
-                    if lastNum<0:  
-                        lst.append(-1*((-1*lastNum)//num))
-                    else: 
-                        lst.append(lastNum//num)
-                    lastDiv=False
-                lastDiv=True
-                multiplier=1
-            # If the Character corresponds to a multiplication
-            elif ord(char)==42:
-                if lastAdd: lastAdd=False; lst.append(num)
-                elif lastSub: lastSub=False; lst.append(num)
-                elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num);    lastMul=False
-                elif lastDiv: 
-                    lastNum=lst.pop()
-                    if lastNum<0:  
-                        lst.append(-1*((-1*lastNum)//num))
-                    else: 
-                        lst.append(lastNum//num)
-                    lastDiv=False
-                lastMul=True
-                multiplier=1
-            
         if lastAdd: lastAdd=False; lst.append(num)
         elif lastSub: lastSub=False; lst.append(num)
-        elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num);    lastMul=False
-        elif lastDiv: 
-                    lastNum=lst.pop()
-                    if lastNum<0:  
-                        lst.append(-1*((-1*lastNum)//num))
-                    else: 
-                        lst.append(lastNum//num)
-                    lastDiv=False
-
+        elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num)
+        elif lastDiv: lastNum=lst.pop(); lst.append(-1*((-1*lastNum)//num)) if lastNum<0 else lst.append(lastNum//num);lastDiv=False
         return sum(lst)
 
 
