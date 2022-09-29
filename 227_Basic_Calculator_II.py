@@ -1,12 +1,8 @@
 class Solution:
     def calculate(self, s: str) -> int:
-        lastAdd=False
-        lastSub=False
-        lastMul=False
-        lastDiv=False
+        lastAdd,lastSub,lastMul,lastDiv=[False for i in range(4)]
         multiplier=1
         lst=[]
-        lastNum=None
         for char in s:
             # If the Character corresponds to a number
             if ord(char)>=48 and ord(char)<=57:
@@ -49,18 +45,17 @@ class Solution:
                 elif lastSub: lastSub=False; lst.append(num)
                 elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num); lastMul=False
                 elif lastDiv: lastNum=lst.pop(); lst.append(-1*((-1*lastNum)//num)) if lastNum<0 else lst.append(lastNum//num);lastDiv=False
+                multiplier=1
                 if ord(char)==43: lastAdd=True  # If the Character corresponds to addition
                 elif ord(char)==45: lastSub=True  # If the Character corresponds to subtraction
                 elif ord(char)==47: lastDiv=True  # If the Character corresponds to division  
                 elif ord(char)==42: lastMul=True  # If the Character corresponds to multiplication
-                multiplier=1
+
         if lastAdd: lastAdd=False; lst.append(num)
         elif lastSub: lastSub=False; lst.append(num)
         elif lastMul: lastNum=lst.pop();  lst.append(lastNum*num)
         elif lastDiv: lastNum=lst.pop(); lst.append(-1*((-1*lastNum)//num)) if lastNum<0 else lst.append(lastNum//num);lastDiv=False
         return sum(lst)
-
-
 
 if __name__=="__main__":
     s = "8*5-45+65/3"
