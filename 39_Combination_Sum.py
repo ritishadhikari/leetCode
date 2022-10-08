@@ -3,7 +3,7 @@ from collections import deque
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res=[]
-        # candidates.sort()
+        candidates.sort()
         stack=deque([[cand] for cand in candidates])
         while stack:
             val=stack.popleft()
