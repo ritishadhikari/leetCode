@@ -1,2 +1,7 @@
-print(-3//2)
-print(round(-3/2))
+s=set()
+
+s.add((1,2))
+
+s.add((2,4))
+
+print(s)
