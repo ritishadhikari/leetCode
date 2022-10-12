@@ -44,6 +44,7 @@ class Solution:
                             island=False
                         if index in connection:
                             stack.extend(connection[index])
+                            stack=list(set(stack))
                             connection.pop(index)
                             if len(allsides)<4:
                                 if index in left:   allsides.add('lc'); left.remove(index)
