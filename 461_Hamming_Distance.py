@@ -31,7 +31,7 @@ class Solution:
 
         return count
 
-        return xlst
+
 
 if __name__=="__main__":
     x=3
