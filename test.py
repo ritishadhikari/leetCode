@@ -1,72 +1,34 @@
-class Solution(object):
-    def maxDistance(self, grid):
-        s = set()
+from typing import List
+from math import inf
+import collections
+
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
         n = len(grid)
-        m = len(grid[0])
-        
-        for i in range(n):
-            for j in range(m):
-                if grid[i][j]:
-                    s.add((i, j))
-        
-        iter = 0
-        while s:
-            ns = set()
-            iter += 1
-            
-            for cor in s:
-                i = cor[0]
-                j = cor[1]
-                
-				#top cell
-                if i !=0 and not grid[i-1][j]:
-                    grid[i-1][j] = 1
-                    ns.add((i-1, j))
-                
-				#left cell
-                if j !=0 and not grid[i][j-1]:
-                    grid[i][j-1] = 1
-                    ns.add((i, j-1))
-                
-				#bottom cell
-                if i !=n-1 and not grid[i+1][j]:
-                    grid[i+1][j] = 1
-                    ns.add((i+1, j))
-                
-				#right cell
-                if j != m-1 and not grid[i][j+1]:
-                    grid[i][j+1] = 1
-                    ns.add((i, j+1))
-            s = ns
-        
-		#ans is iter - 1 because the loop runs for 1 more iteration to make sure no water cells are left.
-		
-		#if no water cells are present
-        if iter-1 == 0:
-            return -1
-        return iter - 1
+        if grid[0][0] or grid[n-1][n-1]:
+          return -1
+        dirs = [[1,0], [-1,0], [0,1], [0,-1], [-1,-1], [1,1], [1,-1], [-1,1]]
+        seen = set()
+        queue = collections.deque([(0,0,1)]) # indice, dist
+        seen.add((0,0))
+        while queue:
+          i,j,dist = queue.pop()
+          if i == n -1 and j == n - 1:
+            return dist
+          for d1, d2 in dirs: 
+            x, y = i + d1, j + d2
+            if 0 <= x < n and 0 <= y < n:
+              if (x,y) not in seen and grid[x][y] == 0:
+                seen.add((x, y))
+                queue.append((x, y, dist + 1))
+        return -1
 
 if __name__=="__main__":
     grid=[
-            [1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0],
-            [1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,0,0,1,1,1],
-            [0,0,1,1,0,1,0,0,1,0,1,1,1,1,1,1,0,0,0,0],
-            [0,0,1,1,0,0,0,1,1,1,1,0,1,1,1,0,0,1,0,1],
-            [1,0,1,1,0,1,1,1,0,1,0,1,0,1,1,0,1,0,1,0],
-            [0,0,1,1,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,1],
-            [0,0,0,1,0,0,1,1,0,0,1,1,1,1,0,0,0,0,1,0],
-            [1,0,0,1,0,1,1,0,0,1,0,0,1,0,1,1,1,0,0,1],
-            [0,1,0,1,1,0,0,1,1,1,1,1,0,0,1,0,1,0,0,0],
-            [1,0,1,0,0,0,0,0,0,1,1,1,0,0,1,0,1,0,1,0],
-            [0,1,1,0,1,1,1,0,0,0,1,0,0,0,1,0,0,0,0,0],
-            [0,0,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0],
-            [0,0,1,1,0,0,1,1,1,1,1,1,1,0,1,0,1,0,0,0],
-            [0,1,0,1,0,0,0,1,1,1,0,0,0,1,1,0,0,1,0,1],
-            [1,0,0,0,1,0,1,0,1,1,1,1,0,0,1,0,0,0,1,1],
-            [0,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,1,0,0,1],
-            [0,1,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,0,0,1],
-            [1,1,1,0,0,1,0,1,1,0,0,0,0,1,1,0,0,0,1,0],
-            [1,1,1,1,1,1,0,1,0,0,0,1,1,1,1,0,0,1,0,1],
-            [0,0,0,1,1,0,1,0,1,0,1,0,1,1,0,1,0,0,0,0]
-            ]
-    print(Solution().maxDistance(grid=grid))
+            [0,1,0,1,0],
+            [1,0,0,0,1],
+            [0,0,1,1,1],
+            [0,0,0,0,0],
+            [1,0,1,0,0]
+    ]
+    print(Solution().shortestPathBinaryMatrix(grid=grid))
