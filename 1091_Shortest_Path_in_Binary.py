@@ -14,8 +14,8 @@ class Solution:
             seen=set()
             seen.add((0,0))
             dirs=[  
-                    (1,-1),  #downleft
-                    (1,1),  #downright
+                    (1,-1),  # downleft
+                    (1,1),  # downright
                     (-1,0), # down
                     (0,1),  # right
                     (0,-1),  # left
