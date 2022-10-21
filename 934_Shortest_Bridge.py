@@ -37,26 +37,25 @@ class Solution:
         # Once we find the islands, we need to reach the second island from the 
         # first island, and for that we need to make the adjacent water as
         # the land by doing BFS.  
-        getCountDict={}
-        oneStack=deque(islandCollections[1])
-        while oneStack:
-            land=oneStack.popleft()
-            if land not in getCountDict:
-                getCountDict[land]=0
-            i,j=land
-            dirs=[(0,-1),(0,1),(-1,0),(1,0)]
-            for dir in dirs:
-                x=dir[0]+i
-                y=dir[1]+j
-                if 0<=x<=row-1 and 0<=y<=col-1 and (x,y) not in getCountDict:
-                    if grid[x][y]:
-                        if (x,y) in islandCollections[2]:
-                            return getCountDict[land]
-                    else:
-                        grid[x][y]=1
-                        oneStack.append((x,y))
-                        getCountDict[(x,y)]=getCountDict[land]+1
-
+        getCountDict=set()
+        while islandCollections[1]:
+            ns=set()
+            for land in islandCollections[1]:
+                i,j=land
+                if land not in getCountDict: getCountDict.add(land)
+                dirs=[(0,-1),(0,1),(-1,0),(1,0)]
+                for dir in dirs:
+                    x=dir[0]+i
+                    y=dir[1]+j
+                    if 0<=x<=row-1 and 0<=y<=col-1 and (x,y) not in getCountDict:
+                        if grid[x][y]:
+                            if (x,y) in islandCollections[2]:
+                                return grid[i][j]-1
+                        else:
+                            ns.add((x,y))
+                            grid[x][y]=grid[i][j]+1
+                            getCountDict.add((x,y))
+            islandCollections[1]=ns
 
 
 if __name__=="__main__":
