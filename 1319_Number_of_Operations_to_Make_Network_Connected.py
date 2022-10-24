@@ -6,7 +6,6 @@ class Solution:
         if len(connections)<n-1:    return -1
         else:
             parent=list(range(n))
-            rank=[0]*n
             for a,b in connections:
                 while a!=parent[a]:  # tracking the source
                     t=a
@@ -18,11 +17,6 @@ class Solution:
                     b=parent[b]
                     n=parent[t]
                     b=parent[t] 
-                    
-                if rank[a]<rank[b]:
-                    a,b=b,a
-                rank[a]+=1
-
                 
                 parent[b]=a  # The destination will always take the identity of the source
         
