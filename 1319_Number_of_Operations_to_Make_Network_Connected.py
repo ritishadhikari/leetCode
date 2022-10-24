@@ -18,11 +18,7 @@ class Solution:
                     b=parent[b]
                     n=parent[t]
                     b=parent[t] 
-                # if rank[a]==rank[b]:        
-                #     rank[a]+=1
-                # elif rank[a]<rank[b]:
-                #     a,b=b,a
-
+                    
                 if rank[a]<rank[b]:
                     a,b=b,a
                 rank[a]+=1
