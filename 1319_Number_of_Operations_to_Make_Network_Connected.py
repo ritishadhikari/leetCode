@@ -18,10 +18,15 @@ class Solution:
                     b=parent[b]
                     n=parent[t]
                     b=parent[t] 
-                if rank[a]==rank[b]:        
-                    rank[a]+=1
-                elif rank[a]<rank[b]:
+                # if rank[a]==rank[b]:        
+                #     rank[a]+=1
+                # elif rank[a]<rank[b]:
+                #     a,b=b,a
+
+                if rank[a]<rank[b]:
                     a,b=b,a
+                rank[a]+=1
+
                 
                 parent[b]=a  # The destination will always take the identity of the source
         
@@ -33,5 +38,5 @@ class Solution:
 
 if __name__=="__main__":
     n=8
-    connections=[[0,1],[0,3],[0,2],[2,3],[4,5],[4,6],[4,7],[0,4],[7,5]]
+    connections=[[0,1],[0,2],[0,3],[1,2],[1,3]]
     print(Solution().makeConnected(n=8, connections=connections))
