@@ -19,9 +19,6 @@ class Solution:
         return maxTime
 
 
-
-
-
 if __name__=="__main__":
     manager=[2,0,-1,4,2,0,4,5,6]
     informTime=[2,0,4,0,3,4,2,0,0]
