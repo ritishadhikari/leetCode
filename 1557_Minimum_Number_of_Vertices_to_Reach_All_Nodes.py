@@ -9,7 +9,6 @@ class Solution:
             traceDict[d]+=1
         
         out=[l for l in traceDict if traceDict[l]==0]
-        
         return out
 if __name__=="__main__":
     n =5
