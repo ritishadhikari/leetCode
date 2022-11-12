@@ -2,33 +2,41 @@ from collections import defaultdict, deque
 from typing import List
 import math
 class Solution:
-    def shortestAlternatingPaths(self, n: int, red_edges: List[List[int]], blue_edges: List[List[int]]) -> List[int]:
-        graph = defaultdict(lambda : defaultdict(lambda: set()))
-        red, blue = 0, 1
-        for st, end in red_edges:
-            graph[st][red].add(end)
-        for st, end in blue_edges:
-            graph[st][blue].add(end)
-        res = [math.inf] * n
+    def minimumJumps(self, forbidden: List[int], a: int, b: int, t: int) -> int:
+        if not t: return 0
         
-        q = deque([(0,red), (0,blue)])
-        level = -1
+        threshold = max(forbidden + [t]) + a + b
+        forbidden = set(forbidden)
+        seen = set([0])
+        q = [[0,0]]
+        
         while q:
-            level += 1
-            size = len(q)
-            for i in range(size):
-                node, color = q.popleft()
-                opp_color = color^1
-                res[node] = min(level, res[node])
-                neighbors = graph[node][opp_color]
-                for child in list(neighbors):
-                    graph[node][opp_color].remove(child)
-                    q.append((child, opp_color))
-        return [r if r != math.inf else -1 for r in res]
+            pos, steps = q.pop(0)
+            
+            if pos+a not in forbidden and pos+a not in seen and pos+a <= threshold: 
+                # Termination Condition
+                if pos+a == t: return steps+1
+                
+                q.append([pos+a, steps+1])
+                seen.add(pos+a)
+                
+            if pos-b > 0 and pos-b not in forbidden and pos-b not in seen: 
+                # Termination Condition
+                if pos-b == t: return steps+1
+                seen.add(pos-b)
+                
+                if pos-b+a not in forbidden and pos-b+a not in seen and pos-b+a <= threshold:
+                    # Termination Condition
+                    if pos-b+a == t: return steps+2
+                    
+                    q.append([pos-b+a, steps+2])
+                    seen.add(pos-b+a)
+        return -1
 
 if __name__=="__main__":
-    redEdges=[[0,1],[0,3],[1,2],[1,3],[2,3],[2,4],[3,4],[4,1]]
-    blueEdges=[[0,1],[1,2],[2,0],[2,3],[3,0],[3,1],[4,0]]
-    print(Solution().shortestAlternatingPaths(n=5, 
-                    red_edges=redEdges, 
-                    blue_edges=blueEdges))
+    if __name__=="__main__":
+        forbidden = [128,178,147,165,63,11,150,20,158,144,136]  
+        a=61
+        b=170
+        t=135
+        print(Solution().minimumJumps(forbidden=forbidden,a=a,b=b,t=t))
