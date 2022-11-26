@@ -18,8 +18,7 @@ class Solution:
                     decrementalR=(r-m)/2
                     if decrementalR>=1:  r=r-math.floor((r-m)/2)
                     else: r=m
-
-    
+                    
                 elif arr[r]>arr[m]:
                     m=r
                     r=len(arr)-1
