@@ -16,7 +16,7 @@ class Solution:
                     else:   l=m
 
                     decrementalR=(r-m)/2
-                    if decrementalR>=1:  r=r-math.floor((r-m)/2)
+                    if decrementalR>=1:  r=r-math.floor(decrementalR)
                     else: r=m
                     
                 elif arr[r]>arr[m]:
