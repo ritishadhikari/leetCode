@@ -1,5 +1,5 @@
 def guess(num: int) -> int:
-        k=1
+        k=9
         if num==k:
             return 0
         if num>k:
