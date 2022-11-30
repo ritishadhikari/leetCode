@@ -7,10 +7,8 @@ class Solution:
         else:
             a=int(a)
         rem=int(c-(a**2))
-
         b=math.sqrt(rem)
         while a>=b:
-            
             if rem%b==0:
                 return True
             else:
