@@ -24,10 +24,6 @@ class Solution:
                 l=r
             m=(l+r)//2
 
-        # if nums[l]==nums[m] and nums[m]==nums[r]:
-        #         return nums[m]
-
-
 if __name__=="__main__":
     nums=[0,1]
     print(Solution().findMin(nums=nums))
