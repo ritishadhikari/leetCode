@@ -13,7 +13,7 @@ class Solution:
             l=i+1
             r=len(nums)-1
             while l<r:
-                s=sum((nums[i]+nums[l]+nums[r]))
+                s=sum((nums[i],nums[l],nums[r]))
                 if abs(s-target)<abs(res-target):
                     res=s
                 if s>target:

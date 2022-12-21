@@ -1,11 +1,17 @@
-a=set()
+class Solution:
+    def triangleNumber(self, nums):
+        nums, count, n = sorted(nums), 0, len(nums)
+        for i in range(2, n):
+            left, right = 0, i-1
+            while left < right:
+                if nums[left] + nums[right] > nums[i]:
+                    count += (right - left)
+                    right -= 1
+                else:
+                    left += 1
+        return count
 
 
-a.add(4)
-
-b=set()
-b.add(3)
-
-a.update(b)
-
-print(a)
+if __name__=="__main__":
+    nums = [2,2,4,3,3]
+    print(Solution().triangleNumber(nums=nums))
