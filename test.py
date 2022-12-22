@@ -1,17 +1,21 @@
 class Solution:
-    def triangleNumber(self, nums):
-        nums, count, n = sorted(nums), 0, len(nums)
-        for i in range(2, n):
-            left, right = 0, i-1
-            while left < right:
-                if nums[left] + nums[right] > nums[i]:
-                    count += (right - left)
-                    right -= 1
-                else:
-                    left += 1
-        return count
+    def findClosestElements(self, A, k, x):
+        left, right = 0, len(A) - k
+        while left < right:
+            mid = (left + right) // 2
+            if x - A[mid] > A[mid + k] - x:
+                left = mid + 1
+            else:
+                right = mid-1
+        return A[left:left + k]
 
 
 if __name__=="__main__":
-    nums = [2,2,4,3,3]
-    print(Solution().triangleNumber(nums=nums))
+    # A = [1,1,1,1,2,2,2,4,4,4,4,5,6]
+    # k=4
+    # x=5
+
+    A=[0,2,2,3,4,6,7,8,9,9]
+    k=4
+    x=5
+    print(Solution().findClosestElements(A=A,k=k,x=x))
