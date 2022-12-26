@@ -1,21 +1,34 @@
+from typing import List
+import math
 class Solution:
-    def findClosestElements(self, A, k, x):
-        left, right = 0, len(A) - k
-        while left < right:
-            mid = (left + right) // 2
-            if x - A[mid] > A[mid + k] - x:
-                left = mid + 1
+    def minimumSize(self, nums: List[int], maxOperations: int) -> int:
+        
+        def valid(guess):
+            """Returns True if we can achieve guess as the 
+            largest number after performing maxOperations"""
+            count = 0
+            for num in nums:
+                if num > guess:
+                    count += math.ceil(num / guess) - 1
+                    if count > maxOperations:
+                        return False
+            return True
+        
+        high = max(nums)
+        best = high
+        low = 1
+        while low <= high:
+            g = (low + high) // 2
+            if valid(g):
+                best = min(best, g)
+                high = g - 1
             else:
-                right = mid-1
-        return A[left:left + k]
+                low = g + 1
+                
+        return best
 
 
 if __name__=="__main__":
-    # A = [1,1,1,1,2,2,2,4,4,4,4,5,6]
-    # k=4
-    # x=5
-
-    A=[0,2,2,3,4,6,7,8,9,9]
-    k=4
-    x=5
-    print(Solution().findClosestElements(A=A,k=k,x=x))
+    nums=[2,4,8,2]
+    maxOperations=4
+    print(Solution().minimumSize(nums=nums,maxOperations=maxOperations))
