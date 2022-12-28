@@ -2,7 +2,6 @@ from typing import List
 class Solution:
     def maxDistance(self, position: List[int], m: int) -> int:
         
-        
         position.sort()
         def valid(guess):
             ans=1
@@ -17,7 +16,6 @@ class Solution:
         r=position[-1]-position[0]
         best=l
         while l<=r:
-            # mid=((r+l)//2) + 1 
             mid=(r+l)//2
             if valid(guess=mid):
                 best=max(best,mid)
