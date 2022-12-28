@@ -1,34 +1,32 @@
 from typing import List
 import math
+
 class Solution:
-    def minimumSize(self, nums: List[int], maxOperations: int) -> int:
+    def maxDistance(self, position: List[int], m: int) -> int:
+        n = len(position)
+        position.sort()
         
-        def valid(guess):
-            """Returns True if we can achieve guess as the 
-            largest number after performing maxOperations"""
-            count = 0
-            for num in nums:
-                if num > guess:
-                    count += math.ceil(num / guess) - 1
-                    if count > maxOperations:
-                        return False
-            return True
+        def count(d):
+            ans, curr = 1, position[0]
+            for i in range(1, n):
+                if position[i] - curr >= d:
+                    ans += 1
+                    curr = position[i]
+            return ans
         
-        high = max(nums)
-        best = high
-        low = 1
-        while low <= high:
-            g = (low + high) // 2
-            if valid(g):
-                best = min(best, g)
-                high = g - 1
+        l, r = 0, position[-1] - position[0]
+        while l < r:
+            # mid = r - (r - l) // 2
+            mid=(r+l)//2+1
+            # mid=l+(r-l)//2
+            if count(mid) >= m:
+                l = mid
             else:
-                low = g + 1
-                
-        return best
+                r = mid - 1
+        return l
 
 
 if __name__=="__main__":
-    nums=[2,4,8,2]
-    maxOperations=4
-    print(Solution().minimumSize(nums=nums,maxOperations=maxOperations))
+    position=[5,4,3,2,1,1000000000]
+    m=2
+    print(Solution().maxDistance(position=position,m=m))
