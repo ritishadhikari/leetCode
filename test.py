@@ -2,31 +2,21 @@ from typing import List
 import math
 
 class Solution:
-    def maxDistance(self, position: List[int], m: int) -> int:
-        n = len(position)
-        position.sort()
-        
-        def count(d):
-            ans, curr = 1, position[0]
-            for i in range(1, n):
-                if position[i] - curr >= d:
-                    ans += 1
-                    curr = position[i]
-            return ans
-        
-        l, r = 0, position[-1] - position[0]
-        while l < r:
-            # mid = r - (r - l) // 2
-            mid=(r+l)//2+1
-            # mid=l+(r-l)//2
-            if count(mid) >= m:
-                l = mid
+    def findDuplicate(self, nums: List[int]) -> int:
+        left, right = 1, len(nums) - 1
+        while left < right : 
+            mid = left + (right - left) // 2
+            count = 0
+            for k in nums:
+                if mid < k <= right:
+                    count += 1
+            if count > right - mid:
+                left = mid + 1
             else:
-                r = mid - 1
-        return l
+                right = mid
+        return right
 
 
 if __name__=="__main__":
-    position=[5,4,3,2,1,1000000000]
-    m=2
-    print(Solution().maxDistance(position=position,m=m))
+    nums=[1,3,4,5,2,2]
+    print(Solution().findDuplicate(nums=nums))
