@@ -15,10 +15,9 @@ class Solution:
         
         def isSubsequence(trimmedString):
             refIndex=0
-            for i,str in enumerate(trimmedString):
-                if str==p[refIndex]:    refIndex+=1
+            for st in trimmedString:
+                if st==p[refIndex]:    refIndex+=1
                 if refIndex==len(p): return True
-                if len(p)-refIndex+1>len(trimmedString)-i+1: return False
             return False
             
         while l<=r:
@@ -31,7 +30,6 @@ class Solution:
                 r=m-1
                 
         return best
-                
 
 if __name__=="__main__":
     s = "abcab"
