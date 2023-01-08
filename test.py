@@ -1,1 +1,2 @@
-print(19 and 6)
+s=["ritish","ritish","rohit"]
+print(set(s))
