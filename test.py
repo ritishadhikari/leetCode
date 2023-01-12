@@ -1,2 +1,21 @@
-s=["ritish","ritish","rohit"]
-print(set(s))
+from typing import List
+class Solution:
+    def maxFrequency(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        n = len(nums)
+        sum_s_w = nums[0]
+        fin = 1
+        i=0
+        for j in range(1,n):
+            sum_s_w+=nums[j]
+            mx = nums[j]
+            while sum_s_w+k<mx*(j-i+1):
+                sum_s_w -= nums[i]
+                i += 1
+            fin = max(fin,j-i+1)
+        return fin
+
+if __name__=="__main__":
+    nums =[1,1,3,4,9]
+    k=4
+    print(Solution().maxFrequency(nums=nums,k=k))
