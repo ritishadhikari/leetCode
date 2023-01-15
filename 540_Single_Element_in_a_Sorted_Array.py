@@ -2,6 +2,8 @@ from typing import List
 class Solution():
     '''
     the single number will always be at the even index
+    # expectation is the odd index and the subsequent even index is same
+    # if it is not same then the single number exists atleast prior to the middle number
     '''
     def singleNonDuplicate(self, nums: List[int]) -> int:
         l=0
