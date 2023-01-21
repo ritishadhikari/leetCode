@@ -1,37 +1,29 @@
 from typing import List
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        length=len(nums)
         l=0
-        r=length-1
-        m=(r+l)//2
+        r=len(nums)-1
         while l<=r:
-            sl=True if nums[l]<=nums[m] else False  # Whether Left from mid is sorted
-            sr=True if nums[r]>=nums[m] else False  # Whether right from mid is sorted
-            if target==nums[m]:
-                return m
-            else:
-                if target>nums[m]:
-                    if sl and sr or sl and not sr:  # When Number is/may part of unsorted right from mid
-                        l=m+1
-                    elif not sl and sr:
-                        if nums[r]>=target:  # When Number is/may part of sorted right from mid
-                            l=m+1
-                        else:  # When Number is/may part of unsorted Left from Mid
-                            r=m-1
+            m=(l+r)//2
+            if target>nums[m]:  # increase case 
+                if target<=nums[r]:  # number lies between m and r
+                    l=m+1
                 else:
-                    if sl and sr or sr and not sl:  # When Number is/may part of unsorted left from mid
+                    if nums[r]>=nums[m]: # number lies on the opposite side
                         r=m-1
-                    elif not sr and sl:
-                        if nums[l]<=target:  # When Number is/may part of sorted left from mid
-                            r=m-1
-                        else:   # When Number is/may part of unsorted right from Mid
-                            l=m+1
-                m=(r+l)//2
-        return -1 
-
+                    else: l=m+1  
+            elif target<nums[m]: # decrease case
+                if target>=nums[l]: # number lies between l and m
+                    r=m-1
+                else:
+                    if nums[l]<=nums[m]: # number lies on the opposite side
+                        l=m+1
+                    else: r=m-1   
+            else: return m         
+        return -1
+        
 
 if __name__=="__main__":
-    nums = [89,91,102,9,1,3,4,5,6]
-    target=1
+    nums = [1,0,1,1,1]
+    target=3
     print(Solution().search(nums=nums,target=target))
