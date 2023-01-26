@@ -6,7 +6,7 @@ class Solution:
         r=len(nums)-1
         while l<=r:
             m=(l+r)//2
-            if nums[m]>=nums[l] and nums[m]<=nums[r]:  # normal ascending matrix
+            if nums[m]>nums[l] and nums[m]<nums[r]:  # normal ascending matrix [1,2], [1,2,3,4,5,6,7]
                 r=m-1
             elif nums[m]<nums[l] and nums[m]<nums[r]:  # min in the left half [12,11,7,8,9], [6,7,1,2,3,4,5]
                 r=m
