@@ -33,9 +33,6 @@ class Solution:
                 return m
         return best
                 
-
-        
-
 if __name__=="__main__":
     arr = [60864,25176,27249,21296,20204]
     target = 56803
