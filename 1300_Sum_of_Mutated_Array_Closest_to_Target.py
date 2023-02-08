@@ -6,7 +6,7 @@ class Solution:
         r=max(arr)
         best=l
 
-        def valid(num):
+        def service(num):
             tot=0
             for v in arr:
                 if v<num:tot+=v
@@ -18,7 +18,7 @@ class Solution:
         res=inf
         while l<=r:
             m=(l+r)//2
-            output=valid(num=m)
+            output=service(num=m)
             if output>0:
                 if abs(output)<res:
                     res=abs(output)
