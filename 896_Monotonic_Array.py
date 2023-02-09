@@ -11,8 +11,7 @@ class Solution:
                     break
             last=num
         
-        if incCase:
-            return True
+        if incCase: return True
         else:
             # Test for Decrease Case
             decCase=True
@@ -24,10 +23,7 @@ class Solution:
                 last=num
             return True if decCase else False
         
-        
-
-
-
+    
 if __name__=="__main__":
     nums = [1,3,2]
     print(Solution().isMonotonic(nums=nums))
