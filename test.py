@@ -1,53 +1,29 @@
-from typing import List
-class Solution:
-    def findLengthOfShortestSubarray(self, arr: List[int]) -> int:
-        
-        def lowerbound(left, right, target):
-            while left < right:
-                mid = left + (right - left) // 2
-                
-                if arr[mid] == target:
-                    right = mid
-                elif arr[mid] < target:
-                    left = mid + 1
+import math
+class Solution():
+    def nthUglyNumber(self, n: int, a: int, b: int, c: int) -> int:
+            def lcm(x, y):
+                return x * y // math.gcd(x, y)
+            
+            def count_ugly(n, a, b, c, ab, bc, ca, abc):
+                answer = n // a + n // b + n // c
+                answer -= n // ab + n // bc + n // ca
+                answer += n // abc
+                return answer
+            
+            ab, bc, ca = lcm(a, b), lcm(b, c), lcm(c, a)
+            abc = lcm(ab, c)
+            low = 1
+            high = 2 * 10 ** 9
+            while low < high:
+                mid = low + (high - low) // 2
+                if count_ugly(mid, a, b, c, ab, bc, ca, abc) < n:
+                    low = mid + 1
                 else:
-                    right = mid
-                
-            return left
-        
-        
-        N = len(arr)
-        
-        # find the longest ascending array on the left side
-        i = 0
-        while i + 1 < N and arr[i] <= arr[i+1]:
-            i += 1
-        
-        if i == N - 1:
-            # it is already in ascending order
-            return 0
-        
-        # find the longest ascending array on the right side
-        j = N - 1
-        while j - 1 >= 0 and arr[j] >= arr[j-1]:
-            j -= 1
-        
-        if j == 0:
-            # the entire array is in decending order
-            return N - 1
-        
-        # keep ascending array on right side or left side
-        result = min(N - (N - j), N - i -1)
-        
-        
-        # find the shortest unordered subarray in the middle 
-        for k in range(i+1):
-            l = lowerbound(left=j, right=len(arr), target=arr[k])
-            result = min(result, l - (k + 1))
-        
-        
-        return result
-
+                    high = mid
+            return low
 if __name__=="__main__":
-	arr = [5,4,3,2,1]
-	print(Solution().findLengthOfShortestSubarray(arr=arr))
+    n = 3
+    a = 2
+    b = 3
+    c = 5
+    print(Solution().nthUglyNumber(a=a,b=b,c=c,n=n))
