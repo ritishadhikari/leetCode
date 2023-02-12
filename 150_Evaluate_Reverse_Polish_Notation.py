@@ -11,9 +11,7 @@ class Solution:
              elif operator=="-": return first-second
              elif operator=="*": return first*second
              else: return int(first/second)
-                #   return 0 if abs(second)>abs(first) else first//second
-                  
-
+                
         for t in tokens:
             if t not in operators:
                 stack.append(int(t))
