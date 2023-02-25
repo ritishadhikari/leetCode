@@ -22,8 +22,7 @@ class Solution:
                     if sr.children:
                         for r in sr.children:
                             nextStock.append(r)
-            if k:
-                answer.append(k)
+            if k:   answer.append(k)
             k=[]
             stack=nextStock
 
