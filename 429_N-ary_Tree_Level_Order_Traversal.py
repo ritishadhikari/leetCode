@@ -16,7 +16,7 @@ class Solution:
                 sr=stack.pop(0)
                 stackLen-=1
                 if sr:
-                # Adding the Values of the Root Node
+                    # Adding the Values of the Root Node
                     k.append(sr.val)
                     # Adding the children
                     if sr.children:
