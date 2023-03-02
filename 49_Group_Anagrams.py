@@ -9,7 +9,7 @@ class Solution:
                 output[sortedString]=[]
             
             output[sortedString].append(st)
-        return output
+
         return list(output.values())
 
 
