@@ -15,6 +15,7 @@ class Solution:
                 lastRow=min(r+2,row)
                 firstCol=max(c-1,0)
                 lastCol=min(c+2,col)
+                
                 mat=[subImg[firstCol:lastCol] for subImg in img[firstRow:lastRow]]
                 tot=0
                 count=0
