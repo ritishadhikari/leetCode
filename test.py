@@ -1,20 +1,25 @@
+from typing import List
 class Solution:
-    def nextGreaterElement(self, n: int) -> int:
-        digits = list(str(n))
-        if digits == sorted(digits, reverse=True):
-            return -1
+    def smallestRangeII(self, nums: List[int], k: int) -> int:
+        nums.sort()
         
-        x = max(i for i in range(len(digits)-1) if digits[i] < digits[i+1])
-        y = max(i for i in range(x+1, len(digits)) if digits[i] > digits[x])
+        current_min = nums[0] - k
+        current_max = nums[-1] - k
         
-        digits[x], digits[y] = digits[y], digits[x]
-        digits[x+1:] = sorted(digits[x+1:])
+        result = current_max - current_min
         
-        nxt = int(''.join(digits))
+        if k == 0:
+            return result
         
-        return nxt if nxt < 2**31 else -1
+        end = len(nums) - 1
+        for i in range(end):
+            current_max = max(current_max, nums[i] + k)
+            current_min = min(nums[0] + k, nums[i + 1] - k)
+            result = min(result, current_max - current_min)
+            
+        return result
     
 if __name__=="__main__":
-    n=158638
-
-    print(Solution().nextGreaterElement(n=n))
+    nums=[1,4,11,3,7]
+    k=3
+    print(Solution().smallestRangeII(nums=nums,k=k))
