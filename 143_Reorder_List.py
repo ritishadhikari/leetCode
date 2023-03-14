@@ -40,7 +40,3 @@ if __name__=="__main__":
                                               next=ListNode(val=4,
                                                             next=ListNode(val=5,
                                                                           next=None)))))
-    
-    [1,5,2,4,3]
-    [1,_,2,_,3]
-    [1,5,]
