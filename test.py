@@ -1,25 +1,48 @@
-from typing import List
+from typing import Optional
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Solution:
-    def smallestRangeII(self, nums: List[int], k: int) -> int:
-        nums.sort()
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        #step 1: find middle
+        if not head: return []
+        slow, fast = head, head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
         
-        current_min = nums[0] - k
-        current_max = nums[-1] - k
+        #step 2: reverse second half
+        prev, curr = None, slow.next
+        while curr:
+            nextt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextt    
+        slow.next = None
         
-        result = current_max - current_min
-        
-        if k == 0:
-            return result
-        
-        end = len(nums) - 1
-        for i in range(end):
-            current_max = max(current_max, nums[i] + k)
-            current_min = min(nums[0] + k, nums[i + 1] - k)
-            result = min(result, current_max - current_min)
-            
-        return result
-    
+        #step 3: merge lists
+        head1, head2 = head, prev
+        while head2:
+            nextt = head1.next
+            head1.next = head2
+            head1 = head2
+            head2 = nextt
+
 if __name__=="__main__":
-    nums=[1,4,11,3,7]
-    k=3
-    print(Solution().smallestRangeII(nums=nums,k=k))
+    head=ListNode(val=1,  #s1,f1
+                  next=ListNode(val=2,  #s2
+                                next=ListNode(val=3,  #f2  #s3
+                                              next=ListNode(val=4,
+                                                            next=ListNode(val=5,  
+                                                                          next=None #f3
+                                                                    )))))
+    
+    print(Solution().reorderList(head=head))
+    # [1,2,3,4,5]                                                                      
+    # [1,2,3] [4,5] = [1,2,3] [5,4]
+    # [1,5,2,4,3]
+    # [1,_,2,_,3]
+    # [1,5,]
+    
