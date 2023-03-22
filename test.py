@@ -1,15 +1,4 @@
-import heapq
-s=[
-    [1,True],
-    [2,False],
-    [3,True],
-    [4,False]
-]
-
-heapq.heapify(s)
-
-smallest=heapq.nsmallest(n=1,iterable=s,key=lambda l: l[1])
-
-print(smallest)
-
-# print(sorted(s,key=lambda l: [l[1],-l[0]]))
+seq=[2,3,4,5,6,7]
+p=10
+take=filter(lambda x: p-x>5,seq)
+print(list(take))
