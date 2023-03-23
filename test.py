@@ -1,4 +1,5 @@
-seq=[2,3,4,5,6,7]
-p=10
-take=filter(lambda x: p-x>5,seq)
-print(list(take))
+p=[False]*100000
+
+p[976:99988]=[True]*(99988-976)
+
+print(p[976:999])
