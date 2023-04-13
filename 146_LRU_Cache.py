@@ -12,7 +12,6 @@ class LRUCache:
         else:
             return -1
         
-
     def put(self, key: int, value: int) -> None:
         if key in self.dct:
             self.dct.move_to_end(key=key,last=True)
