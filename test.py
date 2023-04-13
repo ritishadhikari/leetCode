@@ -1,11 +1,9 @@
-from collections import OrderedDict
+import math
 
-dct=OrderedDict()
+number=range(37)
 
-dct['a']=2
-dct['b']=3
+for i in number:
+    print(f"{i}:{math.factorial(i)}")
 
-v=next(iter(dct))
 
-print(dct.pop(v))
-print(dct)
+# print({n:math.factorial[n] for n in range(1,32)})
