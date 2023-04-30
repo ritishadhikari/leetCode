@@ -1,0 +1,22 @@
+from typing import List
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        redPos=0
+        whitePos=0
+        bluePos=len(nums)-1
+        while whitePos<=bluePos:
+            if nums[whitePos]==0: # Red Ball in White's Position
+                nums[redPos],nums[whitePos]=nums[whitePos],nums[redPos]
+                whitePos+=1
+                redPos+=1
+            elif nums[whitePos]==1: # White Ball in White's Position
+                whitePos+=1
+
+            elif nums[whitePos]==2: # Blue Ball in White's Position
+                nums[bluePos],nums[whitePos]=nums[whitePos],nums[bluePos]
+                bluePos-=1
+        return nums
+
+if __name__=="__main__":
+    nums=[2,0,2,1,1,2]
+    print(Solution().sortColors(nums=nums))
