@@ -14,7 +14,7 @@ class Solution:
                     runningSum=0
             return start
 
-if __name__=="__main__":
+if __name__=="__main__":    
     gas = [7,1,0,11,4]
     cost = [5,9,1,2,5]
     print(Solution().canCompleteCircuit(gas=gas, cost=cost))
