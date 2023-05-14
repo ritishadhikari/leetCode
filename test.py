@@ -1,7 +1,10 @@
 from typing import List
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        n, total_surplus, surplus, start = len(gas), 0, 0, 0
+        n=len(gas) 
+        total_surplus=0 
+        surplus=0
+        start = 0
         
         for i in range(n):
             total_surplus += gas[i] - cost[i]
