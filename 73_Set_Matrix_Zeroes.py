@@ -20,7 +20,7 @@ class Solution:
                         if matrix[r2][c]!=0:
                             trace.add((r2,c))
                             matrix[r2][c]=0
-        return matrix
+        
 
 if __name__=="__main__":
     matrix=[
