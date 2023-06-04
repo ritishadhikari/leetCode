@@ -16,5 +16,5 @@ class Solution:
 
 
 if __name__=="__main__":
-    nums = [2,8,0,5,4]
+    nums = [2,8,5,5,4]
     print(Solution().productExceptSelf(nums=nums))
