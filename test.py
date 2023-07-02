@@ -1,2 +1,1 @@
-print(ord('c'))
-print(chr(99))
+None
