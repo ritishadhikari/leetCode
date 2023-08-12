@@ -1,18 +1,38 @@
-from typing import List
-
-class Solution:
-  def PredictTheWinner(self, nums: List[int]) -> bool:
-    arr = [0] * (n:= len(nums))
-
-    for i in range(n-1,-1,-1):
-        arr[i] = nums[i]
+import collections
+class WordDictionary(object):
+    def __init__(self):
+        self.word_dict = collections.defaultdict(list)
         
-        for j in range(i+1, n):
-            arr[j] = max(nums[i]-arr[j  ],
-                            nums[j]-arr[j-1])
-        
-    return arr[n-1] >= 0    
-  
+
+    def addWord(self, word):
+        if word:
+            self.word_dict[len(word)].append(word)
+    
+    def search(self, word):
+      if not word:
+          return False
+          
+      if '.' not in word:
+          return word in self.word_dict[len(word)]
+          
+      for w in self.word_dict[len(word)]:
+          success = True
+          for index, ch in enumerate(word):
+              if ch != w[index] and ch != '.':
+                  success = False
+                  break
+              
+           if success:
+              return True
+      return False
+    
+
 if __name__=="__main__":
-    nums=[1,5,233,6,9,4]
-    print(Solution().PredictTheWinner(nums=nums))
+    obj=WordDictionary()
+    obj.addWord(word="bad")
+    obj.addWord(word="dad")
+    obj.addWord(word="mad")
+    obj.search(word="pad")
+    obj.search(word="bad")
+    obj.search(word=".ad")
+    obj.search(word="b..")
