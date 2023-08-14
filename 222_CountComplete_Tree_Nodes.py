@@ -1,3 +1,4 @@
+from typing import Optional
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -5,44 +6,17 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def lowestCommonAncestor(self, 
-                             root: 'TreeNode', 
-                             p: 'TreeNode', q: 'TreeNode') -> TreeNode:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
         stack=[root]
-        tracker={}
-        tracker[root.val]=[root.val]
-        pReceived=False
-        qReceived=False
-        
+        count=0
         while stack and stack[0]:
             node=stack.pop()
-
-            if node.val==p:
-                pReceived=True
-                if qReceived:
-                    pAncestors=tracker[node.val]
-                    qAncestors=tracker[q]
-                    for ancestor in pAncestors:
-                        if ancestor in set(qAncestors):
-                            return ancestor
-        
-            elif node.val==q:
-                qReceived=True
-                if pReceived:
-                    qAncestors=tracker[node.val]
-                    pAncestors=tracker[p]
-                    for ancestor in qAncestors:
-                        if ancestor in set(pAncestors):
-                            return ancestor
-
+            count+=1
             if node.left:
-                tracker[node.left.val]=[node.left.val] + tracker[node.val]
                 stack.append(node.left)
             if node.right:
-                tracker[node.right.val]=[node.right.val]+ tracker[node.val]
                 stack.append(node.right)
-            
-    
+        return count
 
 if __name__=="__main__":
     root=TreeNode(
@@ -74,4 +48,4 @@ if __name__=="__main__":
                                                      right=None))
                                                    )                
     )              
-    print(Solution().lowestCommonAncestor(root=root, p=2, q=8))
+    print(Solution().countNodes(root=root))
