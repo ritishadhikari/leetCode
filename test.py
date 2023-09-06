@@ -1,38 +1,20 @@
-import collections
-class WordDictionary(object):
-    def __init__(self):
-        self.word_dict = collections.defaultdict(list)
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        #dp[i][j] will be the least distance from word1[:i] to word2[:j]
+        dp = [[0 for _ in range(len(word2)+1)] for _ in range(len(word1)+1)]
+        for i in range(len(word1)+1):
+            dp[i][0] = i
+            for j in range(1,len(word2)+1):
+                if i == 0:
+                    dp[0][j] = j
+                elif word1[i-1] == word2[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+                else:
+                    dp[i][j] = min(dp[i-1][j-1],dp[i-1][j],dp[i][j-1])+1
+        return dp[-1][-1]  
         
 
-    def addWord(self, word):
-        if word:
-            self.word_dict[len(word)].append(word)
-    
-    def search(self, word):
-      if not word:
-          return False
-          
-      if '.' not in word:
-          return word in self.word_dict[len(word)]
-          
-      for w in self.word_dict[len(word)]:
-          success = True
-          for index, ch in enumerate(word):
-              if ch != w[index] and ch != '.':
-                  success = False
-                  break
-              
-           if success:
-              return True
-      return False
-    
-
 if __name__=="__main__":
-    obj=WordDictionary()
-    obj.addWord(word="bad")
-    obj.addWord(word="dad")
-    obj.addWord(word="mad")
-    obj.search(word="pad")
-    obj.search(word="bad")
-    obj.search(word=".ad")
-    obj.search(word="b..")
+    word1 = "horse"
+    word2 = "ros"
+    print(Solution().minDistance(word1=word1, word2=word2))
