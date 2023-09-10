@@ -26,10 +26,6 @@ class Solution:
                 node=node.right
         return root
 
-                
-        
-           
-    
 
 if __name__=="__main__":
     preorder = [3,9,20,15,7]
