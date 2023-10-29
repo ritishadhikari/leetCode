@@ -7,10 +7,7 @@ class Solution:
         totalWordsLength=len(words)*singleWordsLength
         answer=[]
         wordsDict=Counter("".join(words))
-        wordsListDict=defaultdict(lambda: 0)
-        for w in words:
-            wordsListDict[w]+=1
-
+        wordsListDict=Counter(words)
         for i in range(stringLenth-totalWordsLength+1):
             sequence=s[i:i+totalWordsLength]
             if Counter(sequence)==wordsDict:
