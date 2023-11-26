@@ -1,20 +1,16 @@
 import pandas as pd
+from math import inf
 
 def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
     scores=scores.sort_values(by='score',ascending=False)
     rankVal=0
     rankList=[]
-    prevScore=None
+    prevScore=inf
     for score in scores['score']:
-        if prevScore is None:
+        if score<prevScore:
             rankVal+=1
-            rankList.append(rankVal)
-            prevScore=score
-        else:
-            if score<prevScore:
-                rankVal+=1
-            rankList.append(rankVal)
-            prevScore=score
+        rankList.append(rankVal)
+        prevScore=score
     scores['rank']=rankList
 
     return scores[['score','rank']]
