@@ -4,7 +4,6 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         rangeVal=nums.copy()
         nums=deque([[i] for i in nums])
-
         while nums:
             if len(nums[0])==len(rangeVal):
                 return nums
