@@ -17,5 +17,5 @@ class Solution:
         return [''.join(m) for m in list(product(*traceList))]
 
 if __name__=="__main__":
-    digits="22"
+    digits="234"
     print(Solution().letterCombinations(digits=digits))
