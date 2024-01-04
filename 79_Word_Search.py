@@ -1,12 +1,25 @@
 from typing import List
+
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         
         # first check whether all the words are present or not
-        allChars=set([s for k in board for s in k ])
+        allChars={}
+        for k in board:
+            for s in k:
+                if s not in allChars:
+                    allChars[s]=1
+                else:
+                    allChars[s]+=1
+        # allChars={s for k in board for s in k }
         for c in word:
             if c not in allChars:
                 return False
+            else:
+                allChars[c]-=1
+                if allChars[c]==0:
+                    allChars.pop(c)
+
         
         # Fill the position of the first word in a stack
         stack=[]
@@ -34,14 +47,15 @@ class Solution:
                         # index to its other sequence if found in the
                         # dir for the subsequent indexes
                         newVisited=visited.copy()
-                        newVisited.add((R,C))
+                        visited.add((R,C))
                         stack.append((R,C,index+1,newVisited))
         return False
 
 if __name__=="__main__":
-    board = [["A","B","C","E"],
-             ["S","F","C","S"],
-             ["A","D","C","E"]]
+    # board = [["A","B","C","E"],
+    #          ["S","F","C","S"],
+    #          ["A","D","E","E"]]
+    # word="ABCB"
     
     board=[
         ["A","B","C","E"],
@@ -50,3 +64,4 @@ if __name__=="__main__":
 
     word = "ABCESEEEFS" # "CFDE"
     print(Solution().exist(board=board,word=word))
+    
