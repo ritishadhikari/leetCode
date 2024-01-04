@@ -46,9 +46,11 @@ class Solution:
                         # which will carry forward the sequence for this 
                         # index to its other sequence if found in the
                         # dir for the subsequent indexes
-                        newVisited=visited.copy()
-                        visited.add((R,C))
-                        stack.append((R,C,index+1,newVisited))
+                        # newVisited=visited.copy()
+                        # newVisited.add((R,C))
+                        # stack.append((R,C,index+1,newVisited))
+
+                        stack.append((R,C,index+1,set(list(visited)+[(R,C)])))
         return False
 
 if __name__=="__main__":
