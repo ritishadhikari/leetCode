@@ -1,11 +1,3 @@
-f=set()
-f.add((5,5))
-print(f)
-f=list(f)
-print(f)
-m=f+[(6,4)]
-print(set(m))
+s={(3,4,3),(3,4,3)}
 
-# list(f).extend((6,4))
-# print(f)
-
+print(s)

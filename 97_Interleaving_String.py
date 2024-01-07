@@ -5,7 +5,7 @@ class Solution:
         if l1+l2!=len(s3): 
             return False
         last=set([(0,0)])
-        for ch in s3:
+        for index,ch in enumerate(s3):
             current=set()
             for i,j in last:
                 if i<l1 and s1[i]==ch:
