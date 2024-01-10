@@ -19,7 +19,7 @@ class Solution():
                 node=node.right
             else:
                 node=stack[-1]
-                if not node.left or node.left==last:
+                if node.left is None or node.left==last:
                     node=stack.pop()
                     left=depth.get(node.left,0)
                     right=depth.get(node.right,0)
@@ -58,7 +58,9 @@ if __name__=="__main__":
                                                               right=None
                                                                 )),
                                  right=TreeNode(val=32,
-                                                left=None,
+                                                left=TreeNode(val=15,
+                                                              left=None,
+                                                              right=None),
                                                 right=None)
 
 
