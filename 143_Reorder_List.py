@@ -40,3 +40,4 @@ if __name__=="__main__":
                                               next=ListNode(val=4,
                                                             next=ListNode(val=5,
                                                                           next=None)))))
+    print(Solution().reorderList(head=head))
