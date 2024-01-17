@@ -10,6 +10,17 @@ class Solution:
             childDict[j].add(i)
 
         search=[i for i in range(numCourses) if i not in parentDict]
+        answer=search.copy()
+        while search:
+            i=search.pop(0)
+            childElements=childDict[i]
+            for j in childElements:
+                parentDict[j].remove(i)
+                if not parentDict[j]:
+                    answer.append(j)
+                    search.append(j)
+
+        return answer if len(answer)==numCourses else []
 
         for i in search:
             childElements=childDict[i]
@@ -25,7 +36,7 @@ class Solution:
 
         return search if len(search)==numCourses else []
 if __name__=="__main__":
-    numCourses=1
-    prerequisites=[]
+    numCourses=2
+    prerequisites=[[1,0]]
     print(Solution().findOrder(numCourses=numCourses,
                             prerequisites=prerequisites))
