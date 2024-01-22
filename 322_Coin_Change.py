@@ -14,5 +14,5 @@ class Solution:
             return evalList[-1]
 if __name__=="__main__":
     coins = [5,3]
-    amount = 10
+    amount = 15
     print(Solution().coinChange(coins=coins,amount=amount))
