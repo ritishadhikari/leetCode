@@ -18,4 +18,5 @@ class Solution:
 
 if __name__=="__main__":
     nums=[5, 1, 5, 5,3,4] 
+    nums=[2,3,1,4]
     print(Solution().increasingTriplet(nums=nums))
