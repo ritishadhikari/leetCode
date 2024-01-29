@@ -1,3 +1,4 @@
+# VVI
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
     
@@ -40,4 +41,6 @@ class Solution:
 if __name__=="__main__":
     s = "bchhbbdefghiaaacb"
     k=3
+    s='ababbc'
+    k=2
     print(Solution().longestSubstring(s=s,k=k))
