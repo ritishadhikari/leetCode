@@ -2,6 +2,15 @@ from typing import List
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
         
+        arrLen=len(nums)
+        uniqueVals=set(nums)
+        result=[]
+        for i in range(1,arrLen+1):
+            if i not in uniqueVals:
+                result.append(i)
+        return result
+
+
         for i in range(len(nums)):
             absNum=abs(nums[i])
             index=absNum-1
@@ -11,8 +20,10 @@ class Solution:
         for ind, num in enumerate(nums):
             if num>0:
                 lst.append(ind+1)
-        
+
         return lst
+    
+      
         
     
 
