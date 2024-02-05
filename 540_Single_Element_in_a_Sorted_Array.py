@@ -1,7 +1,7 @@
 from typing import List
 class Solution():
     '''
-    the single number will always be at the even index
+        
     # expectation is the even index and the subsequent odd index is same
     # if it is not same then the single number exists atleast prior to the middle number
     '''
