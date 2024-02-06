@@ -25,5 +25,11 @@ class Solution:
 
 
 if __name__=="__main__":
-    isConnected = [[1,1,0,0,1],[1,1,0,1,0],[0,0,1,0,0],[0,1,0,1,1],[1,0,0,1,1]]
+    isConnected = [
+        [1,1,0,0,1],
+        [1,1,0,1,0],
+        [0,0,1,0,0],
+        [0,1,0,1,1],
+        [1,0,0,1,1]
+        ]
     print(Solution().findCircleNum(isConnected=isConnected))
