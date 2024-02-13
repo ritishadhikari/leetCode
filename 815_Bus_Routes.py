@@ -1,3 +1,4 @@
+# VVI
 from typing import List
 from collections import defaultdict, deque
 from math import inf
@@ -13,26 +14,29 @@ class Solution:
         stack=deque([source])
         busTaken=set()
         routeTaken=set()
-        res=0
+        res=1
+        tempStack=[]
         while stack:
-            res+=1
-            lenStack=len(stack)
-            for _ in range(lenStack):
-                r=stack.popleft()
-                routeTaken.add(r)
-                for bus in stopBoard[r]:
-                    if bus in busTaken: continue
-                    else:
-                        busTaken.add(bus)
-                        for route in routes[bus]:
-                            if route in routeTaken: continue
-                            elif route==target: return res
-                            else : stack.append(route)
+            r=stack.popleft()
+            routeTaken.add(r)
+            for bus in stopBoard[r]:
+                if bus in busTaken: continue
+                else:
+                    busTaken.add(bus)
+                    for route in routes[bus]:
+                        if route in routeTaken: continue
+                        elif route==target: return res
+                        else : tempStack.append(route)
+            if len(stack)==0:
+                res+=1
+                stack=deque(tempStack)
+                tempStack=[]
         return -1
         
 if __name__=="__main__":
  
-    routes = [[1,2,7],[3,6,7],[9,2,8],[8,5,6]]
+    # routes = [[1,2,7],[3,6,7],[9,2,8],[8,5,6]]
+    routes = [[1,2,7],[3,6],[7,3],[1,2]]
     source = 1
     target = 6
     print(Solution().numBusesToDestination(routes=routes,source=source,target=target))
