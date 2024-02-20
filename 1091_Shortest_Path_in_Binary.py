@@ -11,8 +11,6 @@ class Solution:
         else:
             queue=deque()
             queue.append((0,0,1))
-            seen=set()
-            seen.add((0,0))
             dirs=[  
                     (1,-1),  # downleft
                     (1,1),  # downright
@@ -31,8 +29,8 @@ class Solution:
                     x=dir[0]+i
                     y=dir[1]+j
                     if 0<=x<rowCol and 0<=y<rowCol:
-                        if (x,y) not in seen and not grid[x][y]:
-                            seen.add((x,y))
+                        if not grid[x][y]:
+                            grid[x][y]=1
                             queue.append((x,y,count+1))
             return -1
 
