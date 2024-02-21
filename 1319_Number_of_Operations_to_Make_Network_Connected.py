@@ -27,6 +27,12 @@ class Solution:
             return count-1
 
 if __name__=="__main__":
-    n=8
-    connections=[[0,1],[0,2],[0,3],[1,2],[1,3]]
-    print(Solution().makeConnected(n=8, connections=connections))
+    n=6
+    connections=[
+        [0,1],
+        [1,2],
+        [2,3],
+        [2,4],
+        [3,4],
+        ]
+    print(Solution().makeConnected(n=n, connections=connections))
