@@ -23,6 +23,6 @@ class Solution:
         return arr[M]-(D-k+1) if inside else arr[M]+(k-diff)
     
 if __name__=="__main__":
-    arr = [1,10,21,22,25]
+    arr = [1,14,21,22,25]
     k=12
     print(Solution().findKthPositive(arr=arr,k=k))

@@ -19,8 +19,13 @@ class Solution:
 
         for i,num in enumerate(diffList):
             idx=bisect_left(a=nums1,x=nums2[i])
-            if idx>0: best=min(best, totalDiff-num+abs(nums2[i]-nums1[idx-1]))
-            if idx<n: best=min(best,totalDiff-num+abs(nums2[i]-nums1[idx]))
+            if idx<n and nums1[idx]==nums2[i]:
+                best=min(best, totalDiff-num)
+            else:
+                if idx>0: 
+                    best=min(best, totalDiff-num+abs(nums2[i]-nums1[idx-1]))
+                if idx<n: 
+                    best=min(best,totalDiff-num+abs(nums2[i]-nums1[idx]))
         return best%mod
 
 if __name__=="__main__":
