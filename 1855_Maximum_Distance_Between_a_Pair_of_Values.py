@@ -6,6 +6,9 @@ class Solution:
         j=0
         maxDiff=0
         while i<len(nums1) and j<len(nums2):
+            if j==len(nums2)-1 and j-i<=maxDiff:
+                return maxDiff
+
             if i<=j:
                 if nums1[i]<=nums2[j]:
                     maxDiff=max(maxDiff,(j-i))
@@ -20,4 +23,6 @@ if __name__=="__main__":
     nums2 = [9980,9826,9620,9600,9455,9448,9374,9367,9278,9251,9083,8987,8952,8932,8762,8705,8595,8460]
     # nums1=[13,12,11]
     # nums2=[15,13,10]
+    nums1 = [55,30,5,4,2]
+    nums2 = [100,20,10,10,5]
     print(Solution().maxDistance(nums1=nums1, nums2=nums2))
