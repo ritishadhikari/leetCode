@@ -1,4 +1,4 @@
-from typing import Optional,List
+from typing import List,Optional
 from itertools import permutations
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -47,4 +47,4 @@ class Solution:
      
 if __name__=="__main__":
     n=3
-    print(Solution().generateTrees(n=n))
+    print(Solution().generateTrees(n=3))
