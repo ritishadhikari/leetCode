@@ -7,7 +7,7 @@ class Solution:
         for index in range(1, len(colors)-1):
             if (colors[index]=="A" and  
                     colors[index-1]=="A" and colors[index+1]=="A"):
-                alice+=1
+                alice+=1    
             elif (colors[index]=="B" and  
                     colors[index-1]=="B" and colors[index+1]=="B"):
                 bob+=1
