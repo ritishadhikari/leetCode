@@ -1,15 +1,24 @@
-import collections
-class Solution:
-    def getHappyString(self, n: int, k: int) -> str:
-        nextLetter = {'a': 'bc', 'b': 'ac', 'c': 'ab'} 
-        q = collections.deque(['a', 'b', 'c'])
-        while len(q[0]) != n:
-            u = q.popleft()    
-            for v in nextLetter[u[-1]]:
-                q.append(u + v)
-        return q[k - 1] if len(q) >= k else '' 
-    
+from typing import List
+from collections import defaultdict
+from heapq import heappush, heappop
+class Solution():
+    def diagonalSort(self, A: List[List[int]]) -> List[List[int]]:
+            n, m = len(A), len(A[0])
+            d = defaultdict(list)
+            for i in range(n):
+                for j in range(m):
+                    heappush(d[i - j], A[i][j])
+            for i in range(n):
+                for j in range(m):
+                    A[i][j] = heappop(d[i - j])
+            return A
+
 if __name__=="__main__":
-    n=3
-    k=9
-    print(Solution().getHappyString(n=n,k=k))
+     mat = [
+          [11,25,66,1,69,7],
+          [23,55,17,45,15,52],
+          [75,31,36,44,58,8],
+          [22,27,33,25,68,4],
+          [84,28,14,11,5,50]
+          ]
+     print(Solution().diagonalSort(A=mat))
