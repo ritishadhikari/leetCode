@@ -1,24 +1,22 @@
 from typing import List
-from collections import defaultdict
 class Solution:
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
-        winners,losers={},{}
+        winners,losers=set(),{}
         for winner,loser in matches:
             if winner not in winners:
-                winners[winner]=1
+                winners.add(winner)
+
+            if loser in losers:
+                losers[loser]=False  # Losers count is greater than 1
             else:
-                winners[winner]+=1
-            if loser not in losers:
-                losers[loser]=1
-            else:
-                losers[loser]+=1
+                losers[loser]=True  # Losers count is 1 
         
         winnerList,loserList=[],[]
-        for winner,winningCount in winners.items():
+        for winner in winners:
             if winner not in losers:
                 winnerList.append(winner)
-        for loser,losingCount in losers.items():
-            if losingCount==1:
+        for loser,status in losers.items():
+            if status:
                 loserList.append(loser)
         
         return [sorted(winnerList),sorted(loserList)]
