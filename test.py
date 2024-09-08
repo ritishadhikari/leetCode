@@ -1,61 +1,43 @@
-class Solution(object):
-    def diffWaysToCompute(self, input):
-        """
-        :type input: str
-        :rtype: List[int]
-        """
-        # nums (list of lists of int): all the numbers in the input
-        # opts (list of lambda functions): all the operator in the input
-        nums, opts = parse(input)
+from collections import defaultdict
+from typing import List
+import heapq 
+class Graph:
 
-        # A 3D array. See the definition of d.
-        arr = [nums]
+    def __init__(self, n: int, edges: List[List[int]]):
+        self.n = n
+        self.hashmap = defaultdict(list)
+        for src,des,w in edges:
+            self.hashmap[src].append((des,w))
+        
 
-        # d(i,j) = arr[j-i][i], all the possible values obtained from i-th number to j-th number
-        d = lambda start, end: arr[end - start][start]
+    def addEdge(self, edge: List[int]) -> None:
+        src,des,w = edge
+        self.hashmap[src].append((des,w))
+        
 
-        # Fill d in increasing order of num_operands=(j-i)
-        for num_operands in range(2, len(nums) + 1):
-            new_lv = []
-            for start in range(0, len(nums) - num_operands + 1):
-                # values (list): Cartesian product of d(start,split) and d(split+1,end)
-                #     for all possible splits from start-th operand to end-th operand.
-                values = []
-                for split in range(start, start + num_operands - 1):
-                    for a in d(start, split):
-                        for b in d(split + 1, start + num_operands - 1):
-                            values.append(opts[split](a, b))
-                new_lv.append(values)
-            arr.append(new_lv)
+    def shortestPath(self, node1: int, node2: int) -> int:
+        pq = [(0,node1)]
+        distances = [float("inf")] * self.n
+        distances[node1] = 0
 
-        return arr[-1][0]
+        while pq:
+            traveled,node = heapq.heappop(pq)
 
-
-def parse(input):
-    num = 0
-    nums = []
-    opts = []
-    for c in input:
-        if c.isdigit():
-            num = num * 10 + int(c)
-        else:
-            nums.append([num])
-            opts.append(char2lambda(c))
-            num = 0
-    nums.append([num])
-    return nums, opts
-
-
-def char2lambda(c):
-    if c == '+':
-        return lambda a, b: a + b
-    elif c == '-':
-        return lambda a, b: a - b
-    elif c == '*':
-        return lambda a, b: a * b
+            if node == node2:
+                return traveled
+            
+            for neighbor,w in self.hashmap[node]:
+                newdis = traveled + w
+                if newdis < distances[neighbor]:
+                    distances[neighbor] = newdis
+                    heapq.heappush(pq, (newdis,neighbor))
+        return -1
     
 
 if __name__=="__main__":
-    expression = "2*3-4*5"
-    print(Solution().diffWaysToCompute(input=expression))
+    obj=Graph(n=4,edges=[[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]])
+    print(obj.shortestPath(node1=3,node2=2))
+    print(obj.shortestPath(node1=0,node2=3))
+    print(obj.addEdge(edge=[1,3,4]))
+    print(obj.shortestPath(node1=0,node2=3))
     
