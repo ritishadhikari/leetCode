@@ -1,24 +1,34 @@
-class Solution(object):
-    def countSquares(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: int
-        """
-
-        m,n = len(matrix[0]), len(matrix)
-        ans = 0
-        for i in range(n-1,-1,-1):
-            for j in range(m-1, -1, -1):
-                if i+1 < n and j+1 < m and matrix[i][j] == 1:
-                    matrix[i][j] = min(matrix[i+1][j], matrix[i][j+1], matrix[i+1][j+1]) + 1
-            ans += sum(matrix[i])
-        return ans
-
+def findSafeWays(grid):
+    # Write your code here
+        rows=len(grid)
+        cols=len(grid[0])
+        
+        # If path to right is permitted than add one path until we reach the last row
+        # If path to bottom is permitted don't add one more path
+        maxCount=0
+        stack=[(0, 0, 1)]
+        while stack:
+            r, c, count = stack.pop()
+            if r==rows-1:  # we have come to the last row, only go right
+                if c<cols-1:  # We have not reached the last column
+                    if grid[r][c]==1:
+                        stack.append((r+1, c+1, count))
+                    else:  # we have reached the last row and column
+                        maxCount=max(maxCount, count)
+            elif r<rows-1:  # we have not reached the last row
+                if c<cols-1:  # We have not reached the last column
+                    if grid[r][c+1]==1:  # Check if you can go right
+                        stack.append((r, c+1, count+1))
+                    if grid[r+1][c]==1:  # Check if you can go down
+                        stack.append((r+1, c, count+1))
+                if c==cols-1: # we have reached the last column
+                    if grid[r+1][c]==1:  # Check if you can go down
+                        stack.append((r+1, c, count+1))
+        return maxCount
 
 if __name__=="__main__":
-    matrix=[
-            [0,1,1,1],
-            [1,1,1,1],
-            [0,1,1,1]
-            ]
-    print(Solution().countSquares(matrix=matrix))
+    print(findSafeWays(grid=[
+        [1,1,1,1],
+        [1,1,1,1],
+        [1,1,1,1]
+    ]))
