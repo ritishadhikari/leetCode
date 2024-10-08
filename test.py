@@ -13,14 +13,14 @@ def findSafeWays(grid):
                 if c<cols-1:  # We have not reached the last column
                     if grid[r][c]==1:
                         stack.append((r+1, c+1, count))
-                    else:  # we have reached the last row and column
-                        maxCount=max(maxCount, count)
+                else:  # we have reached the last row and column
+                    maxCount=max(maxCount, count)
             elif r<rows-1:  # we have not reached the last row
                 if c<cols-1:  # We have not reached the last column
                     if grid[r][c+1]==1:  # Check if you can go right
                         stack.append((r, c+1, count+1))
                     if grid[r+1][c]==1:  # Check if you can go down
-                        stack.append((r+1, c, count+1))
+                        stack.append((r+1, c, count))
                 if c==cols-1: # we have reached the last column
                     if grid[r+1][c]==1:  # Check if you can go down
                         stack.append((r+1, c, count+1))
