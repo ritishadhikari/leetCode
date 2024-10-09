@@ -3,24 +3,18 @@ from collections import Counter,OrderedDict
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         freq=OrderedDict(Counter(nums))
-        # extra=0
-        # index=0
-        # for val, count in freq.items():
-        #     if count<=2:
-        #         nums[index:index+count]=[val]*count
-        #         index+=count
-        #     else:
-        #         nums[index:index+2]=[val]*2
-        #         index+=2
-        #         extra+=count-2
-        # return len(nums[:index])
-        count=0
-        for val, occ in freq.items():
-            if occ>2:
-                count+=2
+        extra=0
+        index=0
+        for val, count in freq.items():
+            if count<=2:
+                nums[index:index+count]=[val]*count
+                index+=count
             else:
-                count+=occ
-        return count
+                nums[index:index+2]=[val]*2
+                index+=2
+                extra+=count-2
+        return len(nums[:index])
+        
 
 
 if __name__=="__main__":
