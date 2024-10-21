@@ -2,10 +2,10 @@ import pandas as pd
 from collections import Counter
 def find_investments(insurance: pd.DataFrame) -> pd.DataFrame:
     answer=0
-    count=Counter(insurance['tiv_2015'].values.tolist())
     for i,val in insurance.iterrows():
         tiv2015=val['tiv_2015']
-        if count[tiv2015]>1:  # First Condition is satisfied
+        if len(insurance.loc[insurance['tiv_2015']==tiv2015])>1:  # First Condition is satisfied
+        # if count[tiv2015]>1:  
             lat=val['lat']
             lon=val['lon']
             dfLatLong=insurance.loc[
