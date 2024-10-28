@@ -1,5 +1,4 @@
 import random
 
-string="tania"
-value=random.choices(population=string,k=6)
-print(value)
+num="564"
+print((max(num)))
