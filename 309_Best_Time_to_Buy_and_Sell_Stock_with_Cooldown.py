@@ -5,6 +5,7 @@ class Solution:
         cd,sell,hold=0,0,-inf
         for price in prices:
             last_cd,last_sell,last_hold=cd,sell,hold
+            # This step remains unclear
             cd=max(last_cd,last_sell)
             # You can only sell the stock from your last hold price
             sell=last_hold+price
